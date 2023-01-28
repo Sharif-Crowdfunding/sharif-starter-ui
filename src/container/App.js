@@ -1,38 +1,38 @@
 import React from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
+import { AuthProvider } from "../providers/auth";
 import routes from "./routes";
 
 export const App = () => {
   return (
     <HashRouter>
-      {/* <AuthProvider>
-          <ProjectProvider>
+      <AuthProvider>
+        {/* <ProjectProvider>
             <WalletProvider> */}
-      <Routes>
-        {
-        routes.map((route, index) => {
-          console.log(route);
-          return (
-            <Route
-              key={index}
-              path={route.path}
-              exact={route.exact}
-              element={
-                route.layout ? (
-                  <route.layout>
+        <Routes>
+          {routes.map((route, index) => {
+            console.log(route);
+            return (
+              <Route
+                key={index}
+                path={route.path}
+                exact={route.exact}
+                element={
+                  route.layout ? (
+                    <route.layout>
+                      <route.component />
+                    </route.layout>
+                  ) : (
                     <route.component />
-                  </route.layout>
-                ) : (
-                  <route.component />
-                )
-              }
-            />
-          );
-        })}
-      </Routes>
-      {/* </WalletProvider>
-          </ProjectProvider>
-        </AuthProvider> */}
+                  )
+                }
+              />
+            );
+          })}
+        </Routes>
+        {/* </WalletProvider>
+          </ProjectProvider> */}
+      </AuthProvider>
     </HashRouter>
   );
 };

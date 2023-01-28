@@ -1,21 +1,37 @@
 // Auth Imports
 import { Navigate } from "react-router-dom";
+import AuthIllustration from "../layouts/auth/Default";
 import DashboardLayout from "../layouts/dashboard/Dashbord";
+import DefaultLayout from "../layouts/home/DefaultLayout";
+import Register from "../views/auth/Register";
 import SignIn from "../views/auth/SignIn";
+import Dashboard from "./Dashboard";
 import Home from "./Home";
 // import Authenticate from "./Authentication";
 const routes = [
   {
     path: "/login",
     exact: true,
-    layout: SignIn,
+    layout: AuthIllustration,
+    component: SignIn,
+  },
+  {
+    path: "/register",
+    exact: true,
+    layout: AuthIllustration,
+    component: Register ,
+  },
+  {
+    path: "/forgot-password",
+    exact: true,
+    layout: AuthIllustration,
     component: SignIn,
   },
   {
     path: "/d/:section",
     exact: true,
     layout: DashboardLayout,
-    component: Home,
+    component: Dashboard,
   },  {
     path: "/d",
     exact: true,
@@ -25,7 +41,7 @@ const routes = [
   {
     path: "/",
     exact: true,
-    layout: null,
+    layout: DefaultLayout,
     component: Home,
   },
   // {

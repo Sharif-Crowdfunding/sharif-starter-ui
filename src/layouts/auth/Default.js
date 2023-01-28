@@ -6,9 +6,10 @@ import { NavLink } from "react-router-dom";
 // Assets
 import { FaChevronLeft } from "react-icons/fa";
 import FixedPlugin from "../../components/fixedPlugin/FixedPlugin";
+import illustrationBackground from "./../../assets/img/auth/sharif-ce.jpg";
 
 function AuthIllustration(props) {
-  const { children, illustrationBackground } = props;
+  const { children } = props;
   // Chakra color mode
   return (
     <Flex position='relative' h='max-content'>
@@ -28,7 +29,7 @@ function AuthIllustration(props) {
         justifyContent='start'
         direction='column'>
         <NavLink
-          to='/admin'
+          to='/'
           style={() => ({
             width: "fit-content",
             marginTop: "40px",

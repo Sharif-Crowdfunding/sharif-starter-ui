@@ -35,19 +35,20 @@ const routes = [
     component: <div>Main</div>,
   },
   {
-    name: "پروفایل کاربری",
-    layout: "/d",
-    path: "/profile",
-    icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
-    component: <div>Main</div>,
-  },
-  {
     name: "پروژه های من",
     layout: "/d",
     path: "/my-projects",
     icon: <Icon as={MdLibraryBooks} width='20px' height='20px' color='inherit' />,
     component: <div>RTL</div>,
   },
+  {
+    name: "پروفایل کاربری",
+    layout: "/d",
+    path: "/profile",
+    icon: <Icon as={MdPerson} width='20px' height='20px' color='inherit' />,
+    component: <div>Main</div>,
+  },
+
 ];
 
 export default routes;
