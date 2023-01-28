@@ -1,29 +1,33 @@
 // Auth Imports
-import SignIn from "views/auth/SignIn";
-import DashboardLayout from "../layouts/dashboard";
-import DefaultLayout from "../layouts/home";
+import { Navigate } from "react-router-dom";
+import DashboardLayout from "../layouts/dashboard/Dashbord";
+import SignIn from "../views/auth/SignIn";
 import Home from "./Home";
 // import Authenticate from "./Authentication";
 const routes = [
-  // {
-  //   path: "/",
-  //   exact: true,
-  //   layout: DefaultLayout,
-  //   component: Home,
-  // },
-  {
-    path: "/",
-    exact: true,
-    layout: DashboardLayout,
-    component: Home,
-  },
   {
     path: "/login",
     exact: true,
-    layout: null,
+    layout: SignIn,
     component: SignIn,
   },
-
+  {
+    path: "/d/:section",
+    exact: true,
+    layout: DashboardLayout,
+    component: Home,
+  },  {
+    path: "/d",
+    exact: true,
+    layout: DashboardLayout,
+    component: ()=><Navigate to="/d/main" />,
+  },
+  {
+    path: "/",
+    exact: true,
+    layout: null,
+    component: Home,
+  },
   // {
   //   path: "/auth/:section",
   //   layout: DefaultLayout,

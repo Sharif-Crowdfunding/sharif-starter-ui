@@ -4,8 +4,7 @@ import React from "react";
 import { Flex, Text, useColorModeValue } from "@chakra-ui/react";
 
 // Custom components
-import { HorizonLogo } from "components/icons/Icons";
-import { HSeparator } from "components/separator/Separator";
+import { HSeparator } from "../../separator/Separator";
 
 export function SidebarBrand() {
   //   Chakra color mode

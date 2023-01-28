@@ -7,7 +7,7 @@ import { useAuth } from "../../providers/auth";
 const DefaultLayout = ({ children }) => {
   const { user } = useAuth();
   if (user.isAuthenticated) {
-    return <Navigate to="/dashboard" />;
+    return <Navigate to="/d/main" />;
   }
   return (
     <div >

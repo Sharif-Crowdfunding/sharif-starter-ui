@@ -1,11 +1,11 @@
 // Chakra imports
 import { Box, Flex, Icon, Text } from "@chakra-ui/react";
-import FixedPlugin from "components/fixedPlugin/FixedPlugin";
 import PropTypes from "prop-types";
 // Custom components
 import { NavLink } from "react-router-dom";
 // Assets
 import { FaChevronLeft } from "react-icons/fa";
+import FixedPlugin from "../../components/fixedPlugin/FixedPlugin";
 
 function AuthIllustration(props) {
   const { children, illustrationBackground } = props;

@@ -1,27 +1,21 @@
 // Chakra Imports
 import {
-  Avatar,
-  Button,
-  Flex,
-  Icon,
-  Image,
-  Link,
-  Menu,
+  Avatar, Flex,
+  Icon, Menu,
   MenuButton,
   MenuItem,
   MenuList,
   Text,
-  useColorModeValue,
+  useColorModeValue
 } from "@chakra-ui/react";
 // Custom Components
-import { ItemContent } from "components/menu/ItemContent";
-import { SearchBar } from "components/navbar/searchBar/SearchBar";
-import { SidebarResponsive } from "components/sidebar/Sidebar";
 import PropTypes from "prop-types";
 // Assets
-import navImage from "assets/img/layout/Navbar.png";
-import { MdInfoOutline, MdNotificationsNone } from "react-icons/md";
+import { MdNotificationsNone } from "react-icons/md";
 import routes from "../../layouts/dashboard/NavConfig";
+import { ItemContent } from "../menu/ItemContent";
+import { SidebarResponsive } from "../sidebar/Sidebar";
+import { SearchBar } from "./searchBar/SearchBar";
 export default function HeaderLinks(props) {
   const { secondary } = props;
   // Chakra Color Mode

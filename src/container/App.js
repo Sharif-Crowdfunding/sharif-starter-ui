@@ -1,6 +1,3 @@
-import { AuthProvider } from "providers/auth";
-import { ProjectProvider } from "providers/project";
-import { WalletProvider } from "providers/wallet";
 import React from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import routes from "./routes";
@@ -12,7 +9,9 @@ export const App = () => {
           <ProjectProvider>
             <WalletProvider> */}
       <Routes>
-        {routes.map((route, index) => {
+        {
+        routes.map((route, index) => {
+          console.log(route);
           return (
             <Route
               key={index}

@@ -17,11 +17,11 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 // Custom components
-import DefaultAuth from "layouts/auth/Default";
 // Assets
-import illustration from "assets/img/auth/sharif-ce.jpg";
+import illustration from "./../../assets/img/auth/sharif-ce.jpg";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
+import AuthIllustration from "../../layouts/auth/Default";
 
 function SignIn() {
   // Chakra color mode
@@ -33,7 +33,7 @@ function SignIn() {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
   return (
-    <DefaultAuth illustrationBackground={illustration} image={illustration}>
+    <AuthIllustration illustrationBackground={illustration} image={illustration}>
       <Flex
         maxW={{ base: "100%", md: "max-content" }}
         w="100%"
@@ -192,7 +192,7 @@ function SignIn() {
           </Flex>
         </Flex>
       </Flex>
-    </DefaultAuth>
+    </AuthIllustration>
   );
 }
 
