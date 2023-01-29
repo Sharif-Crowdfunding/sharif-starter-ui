@@ -1,24 +1,29 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
 import { useParams } from "react-router-dom";
+import Main from "../views/dashboard/Main";
+import Marketplace from "../views/dashboard/Marketplace";
+import MyProjects from "../views/dashboard/MyProject";
 import Profile from "../views/dashboard/Profile";
 
 const Dashboard = () => {
   const params = useParams();
   function GetSection({ section }) {
     switch (section) {
-    //   case "projects":
-    //     return <MyProjects />;
-    //   case "new-project":
-    //     return <NewProject />;
-    //   case "app":
-    //     return <Overview />;
-    //   case "portfolio":
-    //     return <Portfolio />;
-    //   case "auctions":
-    //     return <Auction />;
-    case "profile":
-        return <Profile />
+        case "projects":
+          return <MyProjects />;
+      //   case "new-project":
+      //     return <NewProject />;
+      //   case "app":
+      //     return <Overview />;
+      //   case "portfolio":
+      //     return <Portfolio />;
+      case "main":
+        return <Main />;
+      case "marketplace":
+        return <Marketplace />;
+      case "profile":
+        return <Profile />;
       default:
         return <></>;
     }

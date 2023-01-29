@@ -1,16 +1,12 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import useFetch from "use-http";
 import urls from "../common/urls";
+import { useFetch } from "../common/useFetch";
 
 const context = React.createContext();
 
 const AuthProvider = ({ children }) => {
-  const { loading, error, data } = useFetch(
-    urls.auth.profile(),
-    { data: undefined, credentials: "include" },
-    []
-  );
+  const { loading, error, data } = useFetch(urls.auth.profile(), "GET");
 
   const [logoutState, setLogoutState] = useState(() => ({
     loading: false,
@@ -18,9 +14,9 @@ const AuthProvider = ({ children }) => {
     success: false,
   }));
   const [user, setUser] = useState(() => ({
-      isLoading: loading,
-      isAuthenticated: false,
-      data: data,
+    isLoading: loading,
+    isAuthenticated: !error,
+    data: data,
   }));
 
   useEffect(() => {
@@ -29,17 +25,20 @@ const AuthProvider = ({ children }) => {
         isLoading: loading,
         isAuthenticated: false,
         data: data,
-      })
+      });
     } else {
       setUser({
         isLoading: loading,
         isAuthenticated: !error,
         data: data,
-      })
+      });
     }
-
   }, [data, loading, error]);
 
+  useEffect(() => {
+    if (logoutState.success)
+      setUser({ isLoading: false, isAuthenticated: false, data: null });
+  }, [logoutState]);
   const logout = async () => {
     if (!error) {
       try {
@@ -48,7 +47,7 @@ const AuthProvider = ({ children }) => {
           loading: true,
         }));
         await axios({
-          method: "POST",
+          method: "GET",
           url: urls.auth.logout(),
           withCredentials: true,
         });
@@ -67,8 +66,6 @@ const AuthProvider = ({ children }) => {
       }
     }
   };
-
-
 
   return (
     <context.Provider value={{ user, logout, logoutState }}>

@@ -15,7 +15,7 @@ const routes = [
   {
     name: "بازار حراجی",
     layout: "/d",
-    path: "/token-marketplace",
+    path: "/marketplace",
     icon: (
       <Icon
         as={MdOutlineShoppingCart}
@@ -37,7 +37,7 @@ const routes = [
   {
     name: "پروژه های من",
     layout: "/d",
-    path: "/my-projects",
+    path: "/projects",
     icon: <Icon as={MdLibraryBooks} width='20px' height='20px' color='inherit' />,
     component: <div>RTL</div>,
   },

@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react";
 import React from "react";
 import ReactApexChart from "react-apexcharts";
 
@@ -6,27 +7,38 @@ class PieChart extends React.Component {
     super(props);
 
     this.state = {
-      chartData: [],
-      chartOptions: {},
+      series: props.data,
+      options: {
+        labels: props.labels,
+        chart: {
+          type: "donut",
+        },
+        responsive: [
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 100,
+              },
+              legend: {
+                position: "bottom",
+              },
+            },
+          },
+        ],
+      },
     };
-  }
-
-  componentDidMount() {
-    this.setState({
-      chartData: this.props.chartData,
-      chartOptions: this.props.chartOptions,
-    });
   }
 
   render() {
     return (
-      <ReactApexChart
-        options={this.state.chartOptions}
-        series={this.state.chartData}
-        type='pie'
-        width='100%'
-        height='55%'
-      />
+      <Box width={"60%"}>
+        <ReactApexChart
+          options={this.state.options}
+          series={this.state.series}
+          type="donut"
+        />
+      </Box>
     );
   }
 }

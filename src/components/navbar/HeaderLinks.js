@@ -1,22 +1,26 @@
 // Chakra Imports
 import {
-  Avatar, Flex,
-  Icon, Menu,
+  Avatar,
+  Flex,
+  Icon,
+  Menu,
   MenuButton,
   MenuItem,
   MenuList,
   Text,
-  useColorModeValue
+  useColorModeValue,
 } from "@chakra-ui/react";
 // Custom Components
 import PropTypes from "prop-types";
 // Assets
 import { MdNotificationsNone } from "react-icons/md";
 import routes from "../../layouts/dashboard/NavConfig";
+import { useAuth } from "../../providers/auth";
 import { ItemContent } from "../menu/ItemContent";
 import { SidebarResponsive } from "../sidebar/Sidebar";
 import { SearchBar } from "./searchBar/SearchBar";
 export default function HeaderLinks(props) {
+  const { user, logout } = useAuth();
   const { secondary } = props;
   // Chakra Color Mode
   const navbarIcon = useColorModeValue("gray.400", "white");
@@ -127,7 +131,7 @@ export default function HeaderLinks(props) {
               fontWeight="700"
               color={textColor}
             >
-              👋&nbsp; سلام عرفان
+              👋&nbsp; سلام {user.data && user.data.first_name}
             </Text>
           </Flex>
           <Flex flexDirection="column" p="10px">
@@ -145,13 +149,12 @@ export default function HeaderLinks(props) {
               color="red.400"
               borderRadius="8px"
               px="14px"
+              onClick={() => logout()}
             >
               <Text fontSize="sm">خروج</Text>
             </MenuItem>
           </Flex>
-          <Flex w="100%" mb="0px">
-            
-          </Flex>
+          <Flex w="100%" mb="0px"></Flex>
         </MenuList>
       </Menu>
     </Flex>

@@ -1,9 +1,8 @@
-// Layout components
 import {
   ChevronDownIcon,
   ChevronRightIcon,
   CloseIcon,
-  HamburgerIcon
+  HamburgerIcon,
 } from "@chakra-ui/icons";
 import {
   Box,
@@ -20,11 +19,10 @@ import {
   Text,
   useBreakpointValue,
   useColorModeValue,
-  useDisclosure
+  useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { RtlProvider } from "../../components/rtlProvider/RtlProvider";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../../providers/auth";
 
 const DefaultLayout = ({ children }) => {
@@ -32,15 +30,13 @@ const DefaultLayout = ({ children }) => {
   const { isOpen, onToggle } = useDisclosure();
   const { user } = useAuth();
 
-  if (user.isAuthenticated) {
-    navigate("/d/main");
-  }
-
   const textColor = useColorModeValue("navy.700", "white");
   const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
 
   return (
-    <RtlProvider>
+    <Box>
+      {user.isAuthenticated && <Navigate to="/d/main" />}
+
       <Box>
         <Flex
           bg={useColorModeValue("gray.200", "white")}
@@ -97,7 +93,7 @@ const DefaultLayout = ({ children }) => {
               fontSize={"lg"}
               fontWeight={500}
               variant={"link"}
-              onClick={() => navigate("/login")}
+              href="/login"
             >
               ورود
             </Button>
@@ -122,7 +118,7 @@ const DefaultLayout = ({ children }) => {
         </Collapse>
       </Box>
       <Box mx="12%">{children}</Box>
-    </RtlProvider>
+    </Box>
   );
 };
 

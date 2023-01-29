@@ -29,7 +29,7 @@ const routes = [
   },
   {
     path: "/d/:section",
-    exact: true,
+    exact: false,
     layout: DashboardLayout,
     component: Dashboard,
   },  {

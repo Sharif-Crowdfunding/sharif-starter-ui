@@ -12,53 +12,54 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 // Custom components
-import Card from "components/card/Card.js";
+import Card from "./Card.js";
 // Assets
 import React, { useState } from "react";
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
 
-export default function NFT(props) {
-  const { image, name, author, bidders, download, currentbid } = props;
-  const [like, setLike] = useState(false);
+export default function Auction(props) {
+  const { image, name, author, bidders, download, currentbid,liked } = props;
+  const [like, setLike] = useState(liked);
   const textColor = useColorModeValue("navy.700", "white");
   const textColorBid = useColorModeValue("brand.500", "white");
   return (
-    <Card p='20px'>
-      <Flex direction={{ base: "column" }} justify='center'>
-        <Box mb={{ base: "20px", "2xl": "20px" }} position='relative'>
+    <Card p="20px">
+      <Flex direction={{ base: "column" }} justify="center">
+        <Box mb={{ base: "20px", "2xl": "20px" }} position="relative">
           <Image
             src={image}
             w={{ base: "100%", "3xl": "100%" }}
             h={{ base: "100%", "3xl": "100%" }}
-            borderRadius='20px'
+            borderRadius="20px"
           />
           <Button
-            position='absolute'
-            bg='white'
+            position="absolute"
+            bg="white"
             _hover={{ bg: "whiteAlpha.900" }}
             _active={{ bg: "white" }}
             _focus={{ bg: "white" }}
-            p='0px !important'
-            top='14px'
-            right='14px'
-            borderRadius='50%'
-            minW='36px'
-            h='36px'
+            p="0px !important"
+            top="14px"
+            right="14px"
+            borderRadius="50%"
+            minW="36px"
+            h="36px"
             onClick={() => {
               setLike(!like);
-            }}>
+            }}
+          >
             <Icon
-              transition='0.2s linear'
-              w='20px'
-              h='20px'
+              transition="0.2s linear"
+              w="20px"
+              h="20px"
               as={like ? IoHeart : IoHeartOutline}
-              color='brand.500'
+              color="brand.500"
             />
           </Button>
         </Box>
-        <Flex flexDirection='column' justify='space-between' h='100%'>
+        <Flex flexDirection="column" justify="space-between" h="100%">
           <Flex
-            justify='space-between'
+            justify="space-between"
             direction={{
               base: "row",
               md: "column",
@@ -66,8 +67,9 @@ export default function NFT(props) {
               xl: "column",
               "2xl": "row",
             }}
-            mb='auto'>
-            <Flex direction='column'>
+            mb="auto"
+          >
+            <Flex direction="column">
               <Text
                 color={textColor}
                 fontSize={{
@@ -78,22 +80,24 @@ export default function NFT(props) {
                   "2xl": "md",
                   "3xl": "lg",
                 }}
-                mb='5px'
-                fontWeight='bold'
-                me='14px'>
+                mb="5px"
+                fontWeight="bold"
+                me="14px"
+              >
                 {name}
               </Text>
               <Text
-                color='secondaryGray.600'
+                color="secondaryGray.600"
                 fontSize={{
                   base: "sm",
                 }}
-                fontWeight='400'
-                me='14px'>
+                fontWeight="400"
+                me="14px"
+              >
                 {author}
               </Text>
             </Flex>
-            <AvatarGroup
+            {/* <AvatarGroup
               max={3}
               color={textColorBid}
               size='sm'
@@ -108,11 +112,11 @@ export default function NFT(props) {
               {bidders.map((avt, key) => (
                 <Avatar key={key} src={avt} />
               ))}
-            </AvatarGroup>
+            </AvatarGroup> */}
           </Flex>
           <Flex
-            align='start'
-            justify='space-between'
+            align="start"
+            justify="space-between"
             direction={{
               base: "row",
               md: "column",
@@ -120,9 +124,10 @@ export default function NFT(props) {
               xl: "column",
               "2xl": "row",
             }}
-            mt='25px'>
-            <Text fontWeight='700' fontSize='sm' color={textColorBid}>
-              Current Bid: {currentbid}
+            mt="25px"
+          >
+            <Text fontWeight="700" fontSize="sm" color={textColorBid}>
+              بالاترین پیشنهاد: {currentbid}
             </Text>
             <Link
               href={download}
@@ -132,16 +137,18 @@ export default function NFT(props) {
                 lg: "0px",
                 xl: "10px",
                 "2xl": "0px",
-              }}>
+              }}
+            >
               <Button
-                variant='darkBrand'
-                color='white'
-                fontSize='sm'
-                fontWeight='500'
-                borderRadius='70px'
-                px='24px'
-                py='5px'>
-                Place Bid
+                variant="darkBrand"
+                color="white"
+                fontSize="sm"
+                fontWeight="500"
+                borderRadius="70px"
+                px="24px"
+                py="5px"
+              >
+                ثبت پیشنهاد
               </Button>
             </Link>
           </Flex>

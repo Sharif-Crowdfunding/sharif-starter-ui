@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 // Chakra imports
 import {
@@ -15,20 +15,52 @@ import {
   InputLeftElement,
   Text,
   useColorModeValue,
+  useToast,
 } from "@chakra-ui/react";
-// Custom components
-// Assets
+
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
 import { useAuth } from "../../providers/auth";
+import axios from "axios";
+import urls from "../../common/urls";
 
 function SignIn() {
-  const navigate =useNavigate()
+  const navigate = useNavigate();
+  const toast = useToast();
   const { user } = useAuth();
   if (user.isAuthenticated) {
     navigate("/d/main");
   }
-  
+
+  const [password, setPassword] = useState();
+  const [username, setUsername] = useState();
+  function login() {
+    axios
+      .post(urls.auth.login(), {
+        username: username,
+        password: password,
+      })
+      .then((response) => {
+        console.log(response.data);
+        navigate("/d/main");
+        console.log("Logged in");
+      })
+      .catch((err) => {
+        toast({
+          title: "ورود ناموفق",
+          description: "اطلاعات اشتباه است.",
+          position: "bottom-right",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+          containerStyle: {
+            direction: "rtl",
+          },
+        });
+        console.log(err);
+      });
+  }
+
   // Chakra color mode
   const textColor = useColorModeValue("navy.700", "white");
   const textColorSecondary = "gray.400";
@@ -91,16 +123,17 @@ function SignIn() {
             color={textColor}
             mb="8px"
           >
-            {"ایمیل"}
+            {"نام کاربری"}
             <Text color={brandStars}>*</Text>
           </FormLabel>
           <Input
             isRequired={true}
+            onChange={(e) => setUsername(e.target.value)}
             variant="auth"
             fontSize="sm"
             ms={{ base: "0px", md: "0px" }}
-            type="email"
-            placeholder="mail@gmail.com"
+            type="username"
+            placeholder="نام کاربری"
             mb="24px"
             fontWeight="500"
             size="lg"
@@ -118,6 +151,7 @@ function SignIn() {
           <InputGroup size="md">
             <Input
               isRequired={true}
+              onChange={(e) => setPassword(e.target.value)}
               fontSize="sm"
               placeholder="حداقل ۸ کاراکتر"
               mb="24px"
@@ -169,6 +203,7 @@ function SignIn() {
             w="100%"
             h="50"
             mb="24px"
+            onClick={() => login()}
           >
             ورود
           </Button>

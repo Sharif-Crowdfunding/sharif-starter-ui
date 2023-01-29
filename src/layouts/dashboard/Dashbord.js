@@ -1,24 +1,23 @@
 // Chakra imports
 import { Box, Portal, useDisclosure } from "@chakra-ui/react";
 // Layout components
-import { useState } from "react";
-import { useLocation } from "react-router-dom";
-import Footer from "../../components/footer/FooterAdmin";
+import { Navigate, useLocation } from "react-router-dom";
+import FixedPlugin from "../../components/fixedPlugin/FixedPlugin";
 import NavbarRTL from "../../components/navbar/NavbarRTL";
-import { RtlProvider } from "../../components/rtlProvider/RtlProvider";
 import Sidebar from "../../components/sidebar/Sidebar";
-import { SidebarContext } from "../../contexts/SidebarContext";
+import { useAuth } from "../../providers/auth";
 import routes from "./NavConfig";
 
 
 export default function DashboardLayout({ children }) {
+  const { user } = useAuth();
+
   let location = useLocation();
   const activeRoute = (routeName) => {
     return location.pathname.includes(routeName);
   };
   // states and functions
-  const [fixed] = useState(false);
-  const [toggleSidebar, setToggleSidebar] = useState(false);
+  // const [toggleSidebar, setToggleSidebar] = useState(false);
   const getActiveRoute = (routes) => {
     let title = "داشبورد";
     for (let i = 0; i < routes.length; i++) {
@@ -30,13 +29,14 @@ export default function DashboardLayout({ children }) {
   document.documentElement.dir = "rtl";
   const { onOpen } = useDisclosure();
   return (
-    <RtlProvider>
-      <SidebarContext.Provider
+    <>
+      {/* <SidebarContext.Provider
         value={{
           toggleSidebar,
           setToggleSidebar,
         }}
-      >
+      > */}
+      {!user.isAuthenticated && <Navigate to="/" />}
         <Sidebar routes={routes} display="none" />
         <Box
           float="left"
@@ -59,7 +59,7 @@ export default function DashboardLayout({ children }) {
                 brandText={getActiveRoute(routes)}
                 // secondary={getActiveNavbar(routes)}
                 // message={getActiveNavbarText(routes)}
-                fixed={fixed}
+                fixed={false}
               />
             </Box>
           </Portal>
@@ -73,8 +73,9 @@ export default function DashboardLayout({ children }) {
           >
              {children}
           </Box>
+          <FixedPlugin />
         </Box>
-      </SidebarContext.Provider>
-    </RtlProvider>
+      {/* </SidebarContext.Provider> */}
+    </>
   );
 }
