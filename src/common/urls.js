@@ -22,6 +22,9 @@ const urls = {
   },
   auction: {
     create: () => `${API_BASE_URL}/auction/create/`,
+    market: () => `${API_BASE_URL}/auction/market/`,
+    bid: () => `${API_BASE_URL}/auction/bid/`,
+    details: (id) => `${API_BASE_URL}/auction/details/${id}/`,
   },
   sale: {
     getProjects: () => `${API_BASE_URL}/user/info/`,

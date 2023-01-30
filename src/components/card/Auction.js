@@ -10,6 +10,7 @@ import {
   Link,
   Text,
   useColorModeValue,
+  VStack,
 } from "@chakra-ui/react";
 // Custom components
 import Card from "./Card.js";
@@ -18,7 +19,16 @@ import React, { useState } from "react";
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
 
 export default function Auction(props) {
-  const { image, name, author, bidders, download, currentbid,liked } = props;
+  const {
+    image,
+    name,
+    author,
+    bidders,
+    onBid,
+    saleToken,
+    minimumbidpertoken,
+    liked,
+  } = props;
   const [like, setLike] = useState(liked);
   const textColor = useColorModeValue("navy.700", "white");
   const textColorBid = useColorModeValue("brand.500", "white");
@@ -126,19 +136,17 @@ export default function Auction(props) {
             }}
             mt="25px"
           >
+            <VStack>
+              <Text fontWeight="500" fontSize="sm" color={textColorBid}>
+                کمترین پیشنهاد ممکن: ETH {minimumbidpertoken / 10 ** 18}
+              </Text>
+              <Text fontWeight="500" fontSize="sm" color={textColorBid}>
+                تعداد توکن حراج: {saleToken}
+              </Text>
+            </VStack>
             <Text fontWeight="700" fontSize="sm" color={textColorBid}>
-              بالاترین پیشنهاد: {currentbid}
+              بالاترین پیشنهاد: ETH {getMaxBid(bidders)}
             </Text>
-            <Link
-              href={download}
-              mt={{
-                base: "0px",
-                md: "10px",
-                lg: "0px",
-                xl: "10px",
-                "2xl": "0px",
-              }}
-            >
               <Button
                 variant="darkBrand"
                 color="white"
@@ -147,13 +155,21 @@ export default function Auction(props) {
                 borderRadius="70px"
                 px="24px"
                 py="5px"
+                onClick={onBid}
               >
                 ثبت پیشنهاد
               </Button>
-            </Link>
           </Flex>
         </Flex>
       </Flex>
     </Card>
   );
+}
+function getMaxBid(bidders) {
+  let max = 0;
+  for (let i = 0; i < bidders.length; i++) {
+    const element = bidders[i];
+    if (element.total_value > max) max = element.total_value;
+  }
+  return max;
 }

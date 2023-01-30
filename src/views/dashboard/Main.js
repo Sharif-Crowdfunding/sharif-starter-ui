@@ -4,12 +4,16 @@ import {
   Flex,
   FormLabel,
   GridItem,
-  Icon, SimpleGrid,
+  Icon,
+  SimpleGrid,
   Text,
-  useColorModeValue
+  useColorModeValue,
+  useToast,
 } from "@chakra-ui/react";
+import axios from "axios";
 import React from "react";
 import { MdAddTask, MdFileCopy } from "react-icons/md";
+import urls from "../../common/urls";
 import MiniStatistics from "../../components/card/MiniStatistics";
 import PieChart from "../../components/charts/PieChart";
 import ColumnsTable from "../../components/ColumnsTable";
@@ -19,8 +23,40 @@ import { useWalletReducer } from "../../providers/wallet";
 import ETH from "./../../assets/img/dashboards/eth_image.png";
 export default function Main() {
   const { state, refresh } = useWalletReducer();
+  const toast = useToast();
   const brandColor = useColorModeValue("brand.500", "white");
   const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
+
+  function createAuction(auction) {
+    axios
+    .post(urls.auction.create(), auction)
+    .then((res) => {
+      toast({
+        title: "حراج با موفقیت ساخته شد.",
+        status: "success",
+        position: "bottom-right",
+        duration: 9000,
+        isClosable: true,
+        containerStyle: {
+          direction: "rtl",
+        },
+      });
+    })
+    .catch((err) => {
+      toast({
+        title: "ساخت حراج ناموفق بود.",
+        status: "error",
+        position: "bottom-right",
+        duration: 9000,
+        isClosable: true,
+        containerStyle: {
+          direction: "rtl",
+        },
+      });
+      console.log(err)
+    });
+  }
+
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
       <SimpleGrid
@@ -88,23 +124,33 @@ export default function Main() {
           tableData={state.tokens}
           tableName="توکن ها"
           refresh={refresh}
+          onAction={createAuction}
         />
-        {state.tokens.length > 0 && <PieChart data={state.tokens.map((c) => c.balance)} labels={state.tokens.map((c) => c.symbol)} />}
+        {state.tokens.length > 0 && (
+          <PieChart
+            data={state.tokens.map((c) => c.balance)}
+            labels={state.tokens.map((c) => c.symbol)}
+          />
+        )}
       </SimpleGrid>
     </Box>
   );
 }
 export const columnsDataColumns = [
   {
-    Header: "Symbol",
+    Header: "نماد",
     accessor: "symbol",
   },
   {
-    Header: "Contract Address",
+    Header: "آدرس کانترکت",
     accessor: "contract_address",
   },
   {
-    Header: "Balance",
+    Header: "موجودی",
     accessor: "balance",
+  },
+  {
+    Header: "عملیات",
+    accessor: "action",
   },
 ];

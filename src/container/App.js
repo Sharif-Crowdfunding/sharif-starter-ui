@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "../providers/auth";
+import { MarketProvider } from "../providers/marketplace";
 import { ProjectProvider } from "../providers/project";
 import { WalletProvider } from "../providers/wallet";
 import routes from "./routes";
@@ -10,6 +11,7 @@ export const App = () => {
     <AuthProvider>
       <ProjectProvider>
         <WalletProvider>
+          <MarketProvider>
             <BrowserRouter>
               <Routes>
                 {routes.map((route, index) => {
@@ -28,6 +30,7 @@ export const App = () => {
                 })}
               </Routes>
             </BrowserRouter>
+          </MarketProvider>
         </WalletProvider>
       </ProjectProvider>
     </AuthProvider>

@@ -6,6 +6,7 @@ import DefaultLayout from "../layouts/home/DefaultLayout";
 import Register from "../views/auth/Register";
 import SignIn from "../views/auth/SignIn";
 import Dashboard from "./Dashboard";
+import Details from "./Details";
 import Home from "./Home";
 // import Authenticate from "./Authentication";
 const routes = [
@@ -19,7 +20,7 @@ const routes = [
     path: "/register",
     exact: true,
     layout: AuthIllustration,
-    component: Register ,
+    component: Register,
   },
   {
     path: "/forgot-password",
@@ -28,15 +29,22 @@ const routes = [
     component: SignIn,
   },
   {
+    path: "/d/details/:id",
+    exact: false,
+    layout: DashboardLayout,
+    component: Details,
+  },
+  {
     path: "/d/:section",
     exact: false,
     layout: DashboardLayout,
     component: Dashboard,
-  },  {
+  },
+  {
     path: "/d",
     exact: true,
     layout: DashboardLayout,
-    component: ()=><Navigate to="/d/main" />,
+    component: () => <Navigate to="/d/main" />,
   },
   {
     path: "/",

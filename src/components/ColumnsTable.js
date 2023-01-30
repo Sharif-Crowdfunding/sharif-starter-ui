@@ -1,7 +1,5 @@
 import {
-  Button,
-  ButtonSpinner,
-  Flex,
+  Button, Flex,
   Table,
   Tbody,
   Td,
@@ -9,7 +7,7 @@ import {
   Th,
   Thead,
   Tr,
-  useColorModeValue,
+  useColorModeValue
 } from "@chakra-ui/react";
 import React, { useMemo } from "react";
 import { IoRefreshCircle } from "react-icons/io5";
@@ -17,15 +15,14 @@ import {
   useGlobalFilter,
   usePagination,
   useSortBy,
-  useTable,
+  useTable
 } from "react-table";
+import NewAuctionModal from "./auctions/NewAuctionModal";
 
 // Custom components
 import Card from "./card/Card";
-import Menu from "./menu/MainMenu";
 export default function ColumnsTable(props) {
-  const { columnsData, tableData, tableName ,refresh} = props;
-
+  const { columnsData, tableData, tableName, refresh ,onAction} = props;
   const columns = useMemo(() => columnsData, [columnsData]);
   const data = useMemo(() => tableData, [tableData]);
 
@@ -67,7 +64,9 @@ export default function ColumnsTable(props) {
         >
           {tableName}
         </Text>
-        <Button onClick={refresh}><IoRefreshCircle /></Button>
+        <Button onClick={refresh}>
+          <IoRefreshCircle />
+        </Button>
       </Flex>
       <Table {...getTableProps()} variant="simple" color="gray.500" mb="24px">
         <Thead>
@@ -83,8 +82,9 @@ export default function ColumnsTable(props) {
                   <Flex
                     justify="space-between"
                     align="center"
-                    fontSize={{ sm: "10px", lg: "12px" }}
+                    fontSize={{ sm: "12px", lg: "16px" }}
                     color="gray.400"
+                    fontFamily={"MyShFont"}
                   >
                     {column.render("Header")}
                   </Flex>
@@ -99,15 +99,21 @@ export default function ColumnsTable(props) {
             return (
               <Tr {...row.getRowProps()} key={index}>
                 {row.cells.map((cell, index) => {
-                  console.log(cell)
+                  console.log(cell.row.values);
                   let data = "";
-                  data = (
-                    <Flex align="center">
-                      <Text color={textColor} fontSize="sm" fontWeight="700">
-                        {cell.value}
-                      </Text>
-                    </Flex>
-                  );
+                  data =
+                    cell.column.id === "action" ? (
+                      <Flex align="center">
+                        <Button mx={"10px"}>انتقال</Button>
+                        <NewAuctionModal onSubmit={onAction} symbol={cell.row.values.symbol} />
+                      </Flex>
+                    ) : (
+                      <Flex align="center">
+                        <Text color={textColor} fontSize="sm" fontWeight="700">
+                          {cell.value}
+                        </Text>
+                      </Flex>
+                    );
 
                   return (
                     <Td
