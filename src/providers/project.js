@@ -5,6 +5,7 @@ import { useAuth } from "./auth";
 
 export const MY_PROJECT_REFRESH = "MY_PROJECT_REFRESH";
 export const REFRESH_SUCCESS = "REFRESH_SUCCESS";
+export const UPDATE_STAGE = "UPDATE_STAGE";
 
 const initialState = {
   count: 0,
@@ -24,6 +25,17 @@ const projectReducer = (state = initialState, action) => {
       return {
         ...state,
         projects: action.payload,
+      };
+    case UPDATE_STAGE:
+      let ps = [...state.projects];
+      for (let index = 0; index < ps.length; index++) {
+        const element = ps[index];
+        if (element.id === action.payload.id)
+          ps[index].token_info.development_stage = action.payload.step;
+      }
+      return {
+        ...state,
+        projects: [...ps],
       };
     default:
       return state;

@@ -89,7 +89,7 @@ export default function Main() {
           tableName="توکن ها"
           refresh={refresh}
         />
-        {state.tokens.length > 0 && <PieChart data={[state.tokens.map((c) => c.balance)]} labels={[state.tokens.map((c) => c.symbol)]} />}
+        {state.tokens.length > 0 && <PieChart data={state.tokens.map((c) => c.balance)} labels={state.tokens.map((c) => c.symbol)} />}
       </SimpleGrid>
     </Box>
   );

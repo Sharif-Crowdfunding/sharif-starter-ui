@@ -15,6 +15,7 @@ export default function Projects({ title, projects }) {
     "0px 18px 40px rgba(112, 144, 176, 0.12)",
     "unset"
   );
+
   return (
     <Card mb={{ base: "0px", "2xl": "20px" }}>
       <Text
@@ -26,13 +27,16 @@ export default function Projects({ title, projects }) {
       >
         {title}
       </Text>
-      {projects && projects.length>0 &&
+      {projects &&
+        projects.length > 0 &&
         projects.map((p) => (
           <Project
             boxShadow={cardShadow}
             mb="20px"
             image={p.image}
             symbol={p.token_info.symbol}
+            stage={p.token_info.development_stage}
+            id={p.id}
             title={p.name}
           />
         ))}
