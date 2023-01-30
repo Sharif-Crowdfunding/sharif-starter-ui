@@ -1,4 +1,4 @@
-import { Box, Grid } from "@chakra-ui/react";
+import { Box, Grid, Spinner } from "@chakra-ui/react";
 
 // Custom components
 
@@ -6,10 +6,12 @@ import { Box, Grid } from "@chakra-ui/react";
 import React from "react";
 import Banner from "../../components/profile/Banner";
 import GeneralInformation from "../../components/profile/General";
+import { useAuth } from "../../providers/auth";
 import banner from "./../../assets/img/auth/banner.png";
-import avatar from "./../../assets/img/avatars/avatar4.png";
+import avatar from "./../../assets/img/avatars/avatarSimmmple.png";
 
 export default function Profile() {
+  const {user}=useAuth()
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
       <Grid
@@ -27,16 +29,16 @@ export default function Profile() {
         gap={{ base: "20px", xl: "20px" }}
         px={"8%"}
       >
-        <Banner
+        {!user.data? <Spinner /> :<Banner
           gridArea="1 / 1 / 2 / 2"
           banner={banner}
           avatar={avatar}
-          name="Adela Parkson"
-          job="Product Designer"
+          name={user.data.first_name +" "+ user.data.last_name}
+          job=""
           posts="17"
           followers="9.7k"
           following="274"
-        />
+        />}
         <GeneralInformation minH="365px" pe="20px" />
       </Grid>
     </Box>
