@@ -22,7 +22,6 @@ const walletReducer = (state = initialState, action) => {
         ...initialState,
       };
     case REFRESH_SUCCESS:
-      console.log(action.payload);
       let data = action.payload;
       return {
         ...state,
@@ -47,7 +46,6 @@ const WalletProvider = ({ children }) => {
   const { user } = useAuth();
 
   const refresh = async () => {
-    console.log("refresh");
     dispatch({ type: REFRESH_REQUESTED });
     try {
       const res = await axios({
@@ -56,7 +54,6 @@ const WalletProvider = ({ children }) => {
       });
       dispatch({ type: REFRESH_SUCCESS, payload: res.data });
     } catch (e) {
-      console.log(e);
       dispatch({ type: REFRESH_ERROR, payload: e.response.error });
     }
   };

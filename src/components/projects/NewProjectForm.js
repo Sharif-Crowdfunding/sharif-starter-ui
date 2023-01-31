@@ -10,8 +10,14 @@ import {
   Input,
   InputGroup,
   InputLeftAddon,
+  NumberDecrementStepper,
+  NumberIncrementStepper,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
   Progress,
   SimpleGrid,
+  Text,
   Textarea,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
@@ -263,6 +269,132 @@ const TokenInfo = ({ state, setState }) => {
   );
 };
 
+const ShareholdersForm = ({ state, setState, token }) => {
+  function setShareholdersNum(n) {
+    let shareholders = [];
+    for (let i = 0; i < n; i++) {
+      const element = {
+        username: "",
+        token_num: 0,
+      };
+      shareholders = [...shareholders, element];
+    }
+    setState({ ...state, shareholders: [...shareholders] });
+    return shareholders;
+  }
+  return (
+    <Box>
+      <Heading
+        w="100%"
+        textAlign={"center"}
+        fontWeight="normal"
+        fontFamily={"MyShFont"}
+      >
+        اضافه کردن سهام‌داران
+      </Heading>
+      <SimpleGrid columns={1} spacing={6}>
+        <FormControl as={GridItem} colSpan={[3, 2]}>
+          <FormLabel
+            fontSize="sm"
+            fontWeight="md"
+            color="gray.700"
+            _dark={{
+              color: "gray.50",
+            }}
+          >
+            تعداد سهامداران
+          </FormLabel>
+          <NumberInput max={10} min={1} onChange={(e) => setShareholdersNum(e)} dir="ltr">
+            <NumberInputField />
+            <NumberInputStepper>
+              <NumberIncrementStepper />
+              <NumberDecrementStepper />
+            </NumberInputStepper>
+          </NumberInput>
+        </FormControl>
+        <FormControl as={GridItem} colSpan={[3, 2]}>
+          <FormLabel
+            fontSize="sm"
+            fontWeight="md"
+            color="gray.700"
+            _dark={{
+              color: "gray.50",
+            }}
+          >
+            فهرست سهامداران
+          </FormLabel>
+          <InputGroup size="sm" my={"5px"}>
+            <Input
+              mx={"5px"}
+              type="number"
+              disabled={true}
+              value={token}
+              focusBorderColor="brand.400"
+              rounded="md"
+              onChange={(e) =>
+                setState({
+                  ...state,
+                  total_supply: parseInt(e.target.value),
+                })
+              }
+            />
+            <Input
+              mx={"5px"}
+              type="text"
+              disabled={true}
+              value="خودم"
+              focusBorderColor="brand.400"
+              rounded="md"
+              onChange={(e) =>
+                setState({
+                  ...state,
+                  total_supply: parseInt(e.target.value),
+                })
+              }
+            />
+          </InputGroup>
+
+          {state.shareholders.map((s, i) => (
+              <InputGroup size="sm" my={"5px"}>
+                <Text>{i + 1}.</Text>
+                <Input
+                  mx={"5px"}
+                  type="number"
+                  placeholder="تعدادتوکن..."
+                  focusBorderColor="brand.400"
+                  rounded="md"
+                  onChange={(e) => {
+                    let temp = [...state.shareholders];
+                    temp[i].token_num = parseInt(e.target.value);
+                    setState({
+                      ...state,
+                      shareholders: [...temp],
+                    });
+                  }}
+                />
+                <Input
+                  mx={"5px"}
+                  type="text"
+                  placeholder="نام کاربری..."
+                  focusBorderColor="brand.400"
+                  rounded="md"
+                  onChange={(e) => {
+                    let temp = [...state.shareholders];
+                    temp[i].username = e.target.value;
+                    setState({
+                      ...state,
+                      shareholders: [...temp],
+                    });
+                  }}
+                />
+              </InputGroup>
+            ))}
+        </FormControl>
+      </SimpleGrid>
+    </Box>
+  );
+};
+
 export default function MultiStep({ onSubmit }) {
   const [basicInfo, setBasicInfo] = useState({
     telegram_id: "",
@@ -279,11 +411,12 @@ export default function MultiStep({ onSubmit }) {
     image: "",
     basic_info: {},
     token_info: {},
+    shareholders: [],
   });
 
   const toast = useToast();
   const [step, setStep] = useState(1);
-  const [progress, setProgress] = useState(33.33);
+  const [progress, setProgress] = useState(25);
   return (
     <>
       <Box
@@ -308,8 +441,14 @@ export default function MultiStep({ onSubmit }) {
           <Project state={project} setState={setProject} />
         ) : step === 2 ? (
           <TokenInfo state={tokenInfo} setState={setTokenInfo} />
-        ) : (
+        ) : step === 3 ? (
           <BasicInfo state={basicInfo} setState={setBasicInfo} />
+        ) : (
+          <ShareholdersForm
+            token={tokenInfo.total_supply}
+            state={project}
+            setState={setProject}
+          />
         )}
         <ButtonGroup mt="5%" w="100%" dir="ltr">
           <Flex w="100%" justifyContent="space-between">
@@ -317,7 +456,7 @@ export default function MultiStep({ onSubmit }) {
               <Button
                 onClick={() => {
                   setStep(step - 1);
-                  setProgress(progress - 33.33);
+                  setProgress(progress - 25);
                 }}
                 isDisabled={step === 1}
                 colorScheme="teal"
@@ -329,13 +468,13 @@ export default function MultiStep({ onSubmit }) {
               </Button>
               <Button
                 w="7rem"
-                isDisabled={step === 3}
+                isDisabled={step === 4}
                 onClick={() => {
                   setStep(step + 1);
-                  if (step === 3) {
+                  if (step === 4) {
                     setProgress(100);
                   } else {
-                    setProgress(progress + 33.33);
+                    setProgress(progress + 25);
                   }
                 }}
                 colorScheme="teal"
@@ -344,7 +483,7 @@ export default function MultiStep({ onSubmit }) {
                 بعد
               </Button>
             </Flex>
-            {step === 3 ? (
+            {step === 4 ? (
               <Button
                 w="7rem"
                 colorScheme="red"

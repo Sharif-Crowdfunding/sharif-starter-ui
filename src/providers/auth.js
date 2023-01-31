@@ -57,7 +57,6 @@ const AuthProvider = ({ children }) => {
           loading: false,
         }));
       } catch (e) {
-        console.log(e);
         setLogoutState((prev) => ({
           ...prev,
           error: e,

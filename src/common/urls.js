@@ -19,6 +19,7 @@ const urls = {
     // upload: () => `${API_BASE_URL}/project/upload/`,
     release: (id) => `${API_BASE_URL}/project/release/${id}/`,
     cancel: (id) => `${API_BASE_URL}/project/cancel/${id}/`,
+    transfer: () => `${API_BASE_URL}/project/transfer/`,
   },
   auction: {
     create: () => `${API_BASE_URL}/auction/create/`,

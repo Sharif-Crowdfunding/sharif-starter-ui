@@ -29,34 +29,63 @@ export default function Main() {
 
   function createAuction(auction) {
     axios
-    .post(urls.auction.create(), auction)
-    .then((res) => {
-      toast({
-        title: "حراج با موفقیت ساخته شد.",
-        status: "success",
-        position: "bottom-right",
-        duration: 9000,
-        isClosable: true,
-        containerStyle: {
-          direction: "rtl",
-        },
+      .post(urls.auction.create(), auction)
+      .then((res) => {
+        toast({
+          title: "حراج با موفقیت ساخته شد.",
+          status: "success",
+          position: "bottom-right",
+          duration: 9000,
+          isClosable: true,
+          containerStyle: {
+            direction: "rtl",
+          },
+        });
+      })
+      .catch((err) => {
+        toast({
+          title: "ساخت حراج ناموفق بود.",
+          status: "error",
+          position: "bottom-right",
+          duration: 9000,
+          isClosable: true,
+          containerStyle: {
+            direction: "rtl",
+          },
+        });
+        console.log(err);
       });
-    })
-    .catch((err) => {
-      toast({
-        title: "ساخت حراج ناموفق بود.",
-        status: "error",
-        position: "bottom-right",
-        duration: 9000,
-        isClosable: true,
-        containerStyle: {
-          direction: "rtl",
-        },
-      });
-      console.log(err)
-    });
   }
 
+  function transferToken(tx) {
+    axios
+      .post(urls.project.transfer(), tx)
+      .then((res) => {
+        toast({
+          title: "انتقال با موفقیت انجام شد.",
+          status: "success",
+          position: "bottom-right",
+          duration: 9000,
+          isClosable: true,
+          containerStyle: {
+            direction: "rtl",
+          },
+        });
+      })
+      .catch((err) => {
+        toast({
+          title: "انتقال ناموفق بود.",
+          status: "error",
+          position: "bottom-right",
+          duration: 9000,
+          isClosable: true,
+          containerStyle: {
+            direction: "rtl",
+          },
+        });
+        console.log(err);
+      });
+  }
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
       <SimpleGrid
@@ -125,6 +154,7 @@ export default function Main() {
           tableName="توکن ها"
           refresh={refresh}
           onAction={createAuction}
+          onTransfer={transferToken}
         />
         {state.tokens.length > 0 && (
           <PieChart

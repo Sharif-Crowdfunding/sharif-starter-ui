@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 // Chakra imports
 import {
@@ -14,12 +14,15 @@ import {
   InputLeftElement,
   Text,
   useColorModeValue,
+  useToast,
 } from "@chakra-ui/react";
 // Custom components
 // Assets
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
 import { useAuth } from "../../providers/auth";
+import axios from "axios";
+import urls from "../../common/urls";
 
 function Register() {
   const navigate = useNavigate();
@@ -27,8 +30,42 @@ function Register() {
   if (user.isAuthenticated) {
     navigate("/d/main");
   }
+  const toast = useToast();
+  const [password, setPassword] = useState();
+  const [username, setUsername] = useState();
+  const [email, setEmail] = useState();
+  const [name, setName] = useState();
+  const [lastName, setLastName] = useState();
 
-  // Chakra color mode
+  function register() {
+    axios
+      .post(urls.auth.register(), {
+        username: username,
+        password: password,
+        first_name: name,
+        last_name: lastName,
+        email: email,
+      })
+      .then((response) => {
+        console.log(response.data);
+        navigate("/login");
+      })
+      .catch((err) => {
+        toast({
+          title: "ورود ناموفق",
+          description: "اطلاعات تکراری است.",
+          position: "bottom-right",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+          containerStyle: {
+            direction: "rtl",
+          },
+        });
+        console.log(err);
+      });
+  }
+
   const textColor = useColorModeValue("navy.700", "white");
   const textColorSecondary = "gray.400";
   const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
@@ -90,6 +127,71 @@ function Register() {
             color={textColor}
             mb="8px"
           >
+            {"نام"}
+            <Text color={brandStars}>*</Text>
+          </FormLabel>
+          <Input
+            isRequired={true}
+            onChange={(e) => setName(e.target.value)}
+            fontSize="sm"
+            ms={{ base: "0px", md: "0px" }}
+            placeholder="نام"
+            mb="24px"
+            fontWeight="500"
+            size="lg"
+          />
+          <FormLabel
+            display="flex"
+            ms="4px"
+            fontSize="sm"
+            fontWeight="500"
+            color={textColor}
+            mb="8px"
+          >
+            {"نام خانوادگی"}
+            <Text color={brandStars}>*</Text>
+          </FormLabel>
+          <Input
+            isRequired={true}
+            onChange={(e) => setLastName(e.target.value)}
+            fontSize="sm"
+            ms={{ base: "0px", md: "0px" }}
+            placeholder="نام خانوادگی"
+            mb="24px"
+            fontWeight="500"
+            size="lg"
+          />
+          <FormLabel
+            display="flex"
+            ms="4px"
+            fontSize="sm"
+            fontWeight="500"
+            color={textColor}
+            mb="8px"
+          >
+            {"نام کاربری"}
+            <Text color={brandStars}>*</Text>
+          </FormLabel>
+          <Input
+            isRequired={true}
+            onChange={(e) => setUsername(e.target.value)}
+            variant="auth"
+            fontSize="sm"
+            ms={{ base: "0px", md: "0px" }}
+            type="username"
+            placeholder="نام کاربری"
+            mb="24px"
+            fontWeight="500"
+            size="lg"
+          />
+          <FormLabel
+            display="flex"
+            ms="4px"
+            fontSize="sm"
+            fontWeight="500"
+            color={textColor}
+            mb="8px"
+          >
             {"ایمیل"}
             <Text color={brandStars}>*</Text>
           </FormLabel>
@@ -103,6 +205,7 @@ function Register() {
             mb="24px"
             fontWeight="500"
             size="lg"
+            onChange={(e) => setEmail(e.target.value)}
           />
           <FormLabel
             ms="4px"
@@ -123,35 +226,7 @@ function Register() {
               size="lg"
               type={show ? "text" : "password"}
               variant="auth"
-            />
-            <InputLeftElement display="flex" alignItems="center" mt="4px">
-              <Icon
-                color={textColorSecondary}
-                _hover={{ cursor: "pointer" }}
-                as={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
-                onClick={handleClick}
-              />
-            </InputLeftElement>
-          </InputGroup>
-          <FormLabel
-            ms="4px"
-            fontSize="sm"
-            fontWeight="500"
-            color={textColor}
-            display="flex"
-          >
-            {"تکرار رمزعبور"}
-            <Text color={brandStars}>*</Text>
-          </FormLabel>
-          <InputGroup size="md">
-            <Input
-              isRequired={true}
-              fontSize="sm"
-              placeholder="حداقل ۸ کاراکتر"
-              mb="24px"
-              size="lg"
-              type={show ? "text" : "password"}
-              variant="auth"
+              onChange={(e) => setPassword(e.target.value)}
             />
             <InputLeftElement display="flex" alignItems="center" mt="4px">
               <Icon
@@ -169,6 +244,7 @@ function Register() {
             w="100%"
             h="50"
             mb="24px"
+            onClick={register}
           >
             {"ثبت‌نام"}
           </Button>

@@ -99,11 +99,14 @@ const DefaultLayout = ({ children }) => {
             </Button>
             <Button
               display={{ base: "none", md: "inline-flex" }}
+              width="100px"
+              height={'40px'}
               fontSize={"lg"}
               fontWeight={500}
               color={"white"}
               bg={textColor}
-              onClick={() => navigate("/register")}
+              as={'a'}
+              href="/register"
               _hover={{
                 bg: textColor,
               }}

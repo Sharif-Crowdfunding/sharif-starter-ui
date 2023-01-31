@@ -1,5 +1,6 @@
 import {
-  Button, Flex,
+  Button,
+  Flex,
   Table,
   Tbody,
   Td,
@@ -7,7 +8,7 @@ import {
   Th,
   Thead,
   Tr,
-  useColorModeValue
+  useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useMemo } from "react";
 import { IoRefreshCircle } from "react-icons/io5";
@@ -15,14 +16,16 @@ import {
   useGlobalFilter,
   usePagination,
   useSortBy,
-  useTable
+  useTable,
 } from "react-table";
 import NewAuctionModal from "./auctions/NewAuctionModal";
 
 // Custom components
 import Card from "./card/Card";
+import TransferToken from "./projects/TransferTokenModal";
 export default function ColumnsTable(props) {
-  const { columnsData, tableData, tableName, refresh ,onAction} = props;
+  const { columnsData, tableData, tableName, refresh, onAction, onTransfer } =
+    props;
   const columns = useMemo(() => columnsData, [columnsData]);
   const data = useMemo(() => tableData, [tableData]);
 
@@ -99,13 +102,15 @@ export default function ColumnsTable(props) {
             return (
               <Tr {...row.getRowProps()} key={index}>
                 {row.cells.map((cell, index) => {
-                  console.log(cell.row.values);
                   let data = "";
                   data =
                     cell.column.id === "action" ? (
                       <Flex align="center">
-                        <Button mx={"10px"}>انتقال</Button>
-                        <NewAuctionModal onSubmit={onAction} symbol={cell.row.values.symbol} />
+                        <TransferToken onSubmit={onTransfer} symbol={cell.row.values.symbol} />
+                        <NewAuctionModal
+                          onSubmit={onAction}
+                          symbol={cell.row.values.symbol}
+                        />
                       </Flex>
                     ) : (
                       <Flex align="center">
