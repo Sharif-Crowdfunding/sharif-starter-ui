@@ -11,7 +11,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
 import { MdAddTask, MdFileCopy } from "react-icons/md";
 import urls from "../../common/urls";
 import MiniStatistics from "../../components/card/MiniStatistics";
@@ -26,7 +26,10 @@ export default function Main() {
   const toast = useToast();
   const brandColor = useColorModeValue("brand.500", "white");
   const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
-
+  useEffect(() => {
+    refresh()
+  }, [])
+  
   function createAuction(auction) {
     axios
       .post(urls.auction.create(), auction)

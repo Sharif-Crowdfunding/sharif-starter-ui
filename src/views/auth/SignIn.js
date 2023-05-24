@@ -42,8 +42,7 @@ function SignIn() {
       })
       .then((response) => {
         console.log(response.data);
-        navigate("/d/main");
-        console.log("Logged in");
+        window.location.reload()
       })
       .catch((err) => {
         toast({
