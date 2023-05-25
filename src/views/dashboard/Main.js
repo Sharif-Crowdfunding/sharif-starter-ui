@@ -106,7 +106,8 @@ export default function Main() {
               </Flex>
             }
             name="موجودی حساب"
-            value={state.ethBalance + "ETH"}
+            value={state.ethBalance}
+            secondValue = "ETH"
           />
         </GridItem>
         <MiniStatistics
@@ -153,7 +154,7 @@ export default function Main() {
         {state.tokens.length > 0 && (
           <PieChart
             data={state.tokens.map((c) => c.balance)}
-            labels={state.tokens.map((c) => c.symbol)}
+            labels={state.tokens.map((c) => " "+c.symbol+" ")}
           />
         )}
       </SimpleGrid>

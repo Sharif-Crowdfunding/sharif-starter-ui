@@ -34,7 +34,6 @@ export default function Profile() {
         {!user.data? <Spinner /> :<Banner
           gridArea="1 / 1 / 2 / 2"
           banner={banner}
-          avatar={avatar}
           name={user.data.first_name +" "+ user.data.last_name}
           job=""
           posts="17"

@@ -86,7 +86,7 @@ export default function Introduction() {
     <Box bg={useColorModeValue("gray.100", "gray.700")}>
       <Container maxW={"7xl"} py={16} as={Stack} spacing={12}>
         <Stack spacing={0} align={"center"}>
-          <Heading>به امید ایرانی زیباتر</Heading>
+          <Heading fontFamily={"MyShFont"}>به امید ایرانی زیباتر</Heading>
           <Text>باتکیه بر جامعه دانشگاهی کشور</Text>
         </Stack>
         <Stack

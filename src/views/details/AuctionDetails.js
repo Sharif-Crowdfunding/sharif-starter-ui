@@ -33,7 +33,7 @@ export default function AuctionDetails({ id }) {
   const { data, error, loading } = useFetch(urls.auction.details(id), "GET");
   useEffect(() => {
     if (loading) {
-      dispatch({ type: AUCTION_DETAILS });
+      dispatch({ type: AUCTION_DETAILS, payload: id });
     }
     if (error) {
       console.log(error);
@@ -62,7 +62,6 @@ export default function AuctionDetails({ id }) {
   }
 
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  const textColorBrand = useColorModeValue("brand.500", "white");
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
       <Grid
@@ -90,13 +89,16 @@ export default function AuctionDetails({ id }) {
               <Button variant="action">نمایش همه</Button>
             </Flex>
 
-            {state.auctionDetails.details && state.auctionDetails.details.bidders.map((e)=>  <HistoryItem
-              name="Colorful Heaven"
-              author="By Mark Benjamin"
-              date="30s ago"
-              image={Nft5}
-              price="0.91 ETH"
-            />)}
+            {state.auctionDetails.details &&
+              state.auctionDetails.details.bidders.map((e) => (
+                <HistoryItem
+                  name="Colorful Heaven"
+                  author="By Mark Benjamin"
+                  date="30s ago"
+                  image={Nft5}
+                  price="0.91 ETH"
+                />
+              ))}
           </Card>
         </Flex>
         <Flex
@@ -132,8 +134,38 @@ export default function AuctionDetails({ id }) {
               </Text>
             </Flex>
           </Card>
+          <MyBids textColor={textColor} />
         </Flex>
       </Grid>
     </Box>
+  );
+}
+
+function MyBids({}) {
+  return (
+    <>
+      <Card p="0px" my="1%">
+        <Flex
+          align={{ sm: "flex-start", lg: "center" }}
+          justify="space-between"
+          w="100%"
+          px="22px"
+          py="18px"
+        >
+        
+        </Flex>
+      </Card>
+      <Card p="0px" my="1%">
+        <Flex
+          align={{ sm: "flex-start", lg: "center" }}
+          justify="space-between"
+          w="100%"
+          px="22px"
+          py="18px"
+        >
+          
+        </Flex>
+      </Card>
+    </>
   );
 }

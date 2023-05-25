@@ -1,6 +1,7 @@
 // Chakra imports
 // Chakra imports
 import {
+  Stack,
   Flex,
   Stat,
   StatLabel,
@@ -14,7 +15,7 @@ import Card from "../card/Card.js";
 import React from "react";
 
 export default function MiniStatistics(props) {
-  const { startContent, endContent, name, value } = props;
+  const { startContent, endContent, name, value, secondValue } = props;
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "secondaryGray.600";
 
@@ -41,11 +42,14 @@ export default function MiniStatistics(props) {
           <StatNumber
             color={textColor}
             fontSize={{
-              base: "xl",
+              base: "3xl",
             }}
-            style={{direction:"ltr"}}
+            style={{ direction: "ltr" }}
           >
-            {value}
+            <Stack direction={"row"} >
+            <Text >{value}</Text> <Text style={{marginTop:"15px"}} fontSize={{ base: "sm" }}>{secondValue}</Text>
+        </Stack>
+              
           </StatNumber>
         </Stat>
         <Flex ms="auto" w="max-content">
