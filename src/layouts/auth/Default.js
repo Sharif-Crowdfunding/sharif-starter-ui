@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 // Assets
 import { FaChevronLeft } from "react-icons/fa";
 import FixedPlugin from "../../components/fixedPlugin/FixedPlugin";
-import illustrationBackground from "./../../assets/img/auth/sharif-ce.jpg";
+import illustrationBackground from "./../../assets/img/auth/BLOCKCHAIN.png";
 
 function AuthIllustration(props) {
   const { children } = props;

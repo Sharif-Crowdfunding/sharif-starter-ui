@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 // Custom components
 // Assets
-import illustration from "./../../assets/img/auth/sharif-ce.jpg";
+import illustration from "./../../assets/img/auth/BLOCKCHAIN.png";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
 import AuthIllustration from "../../layouts/auth/Default";
