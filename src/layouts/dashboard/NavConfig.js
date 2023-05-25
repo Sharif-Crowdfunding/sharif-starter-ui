@@ -31,7 +31,7 @@ const routes = [
     name: "گزارش",
     layout: "/d",
     icon: <Icon as={MdBarChart} width='20px' height='20px' color='inherit' />,
-    path: "/data-tables",
+    path: "/report",
     component: <div>Main</div>,
   },
   {

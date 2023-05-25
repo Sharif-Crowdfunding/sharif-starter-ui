@@ -15,8 +15,6 @@ import {
   REFRESH_SUCCESS,
   useProjectReducer,
 } from "../../providers/project";
-import banner from "./../../assets/img/auth/banner.png";
-import avatar from "./../../assets/img/avatars/avatar4.png";
 
 export default function MyProjects() {
   const { state, dispatch } = useProjectReducer();
