@@ -34,7 +34,7 @@ export default function Marketplace() {
     if (error) {
       console.log(error);
     }
-    if (data && data.length > 0) {
+    if (data && !loading) {
       dispatch({ type: MARKET_REFRESH_SUCCESS, payload: data });
     }
   }, [error, data, loading]);
