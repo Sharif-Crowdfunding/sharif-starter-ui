@@ -9,9 +9,11 @@ import GeneralInformation from "../../components/profile/General";
 import { useAuth } from "../../providers/auth";
 import banner from "./../../assets/img/auth/banner.png";
 import avatar from "./../../assets/img/avatars/avatarSimmmple.png";
+import { useWalletReducer } from "../../providers/wallet";
 
 export default function Profile() {
   const {user}=useAuth()
+  const { state } = useWalletReducer();
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
       <Grid
@@ -36,8 +38,7 @@ export default function Profile() {
           name={user.data.first_name +" "+ user.data.last_name}
           job=""
           posts="17"
-          followers="9.7k"
-          following="274"
+          walletAddress ={state.walletAddress}
         />}
         <GeneralInformation minH="365px" pe="20px" />
       </Grid>

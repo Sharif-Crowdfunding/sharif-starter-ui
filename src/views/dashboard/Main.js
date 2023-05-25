@@ -100,15 +100,6 @@ export default function Main() {
           <MiniStatistics
             endContent={
               <Flex me="-16px" mt="10px">
-                <Text
-                  id="balance"
-                  variant="mini"
-                  mt="20px"
-                  me="10px"
-                  defaultValue="0x0"
-                >
-                  {state.walletAddress}
-                </Text>
                 <FormLabel htmlFor="balance">
                   <Avatar src={ETH} />
                 </FormLabel>
