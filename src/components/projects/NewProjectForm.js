@@ -459,8 +459,8 @@ export default function MultiStep({ onSubmit }) {
                   setProgress(progress - 25);
                 }}
                 isDisabled={step === 1}
-                colorScheme="teal"
-                variant="solid"
+                colorScheme="blue"
+                variant="outline"
                 w="7rem"
                 mr="5%"
               >
@@ -477,8 +477,8 @@ export default function MultiStep({ onSubmit }) {
                     setProgress(progress + 25);
                   }
                 }}
-                colorScheme="teal"
-                variant="outline"
+                colorScheme="blue"
+                variant="solid"
               >
                 بعد
               </Button>
@@ -486,7 +486,7 @@ export default function MultiStep({ onSubmit }) {
             {step === 4 ? (
               <Button
                 w="7rem"
-                colorScheme="red"
+                colorScheme="green"
                 variant="solid"
                 onClick={() => {
                   onSubmit({

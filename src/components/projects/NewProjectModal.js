@@ -26,7 +26,10 @@ export default function NewProjectModal({onSubmit}) {
   return (
     <>
       <Button
-        minH={"80px"}
+      colorScheme='blue' 
+      variant='outline'
+        minH={"70px"}
+        width={300}
         onClick={() => {
           setOverlay(<OverlayOne />);
           onOpen();
@@ -37,7 +40,7 @@ export default function NewProjectModal({onSubmit}) {
       <Modal isCentered isOpen={isOpen} size={"3xl"} onClose={onClose}>
         {overlay}
         <ModalContent dir="rtl">
-          <ModalHeader>ساخت پروژه</ModalHeader>
+          <ModalHeader style={{paddingRight:"80px"}}>ساخت پروژه</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <MultiStep
