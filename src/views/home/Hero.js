@@ -7,7 +7,8 @@ import {
     Text,
     useBreakpointValue,
   } from '@chakra-ui/react';
-  
+  import landingBg from "../../assets/img/home/CROWDFUNDING.jpg"
+
   export default function Hero() {
     return (
       <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
@@ -27,16 +28,15 @@ import {
                   bg: 'blue.400',
                   zIndex: -1,
                 }}>
-                Freelance
+                  جمع‌سپاری پروژه‌های دانشگاهی
               </Text>
               <br />{' '}
               <Text color={'blue.400'} as={'span'}>
-                Design Projects
+              برپایه‌ی بلاک‌چین
               </Text>{' '}
             </Heading>
             <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
-              The project board is an exclusive resource for contract work. It's
-              perfect for freelancers, agencies, and moonlighters.
+            توسعه سامانه هوشمند تامین مالی جمعی پروژه‌های دانشگاهی بربستر فناوری بلاک‌چین
             </Text>
             <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
               <Button
@@ -46,9 +46,8 @@ import {
                 _hover={{
                   bg: 'blue.500',
                 }}>
-                Create Project
+                ساخت پروژه جدید
               </Button>
-              <Button rounded={'full'}>How It Works</Button>
             </Stack>
           </Stack>
         </Flex>
@@ -56,9 +55,7 @@ import {
           <Image
             alt={'Login Image'}
             objectFit={'cover'}
-            src={
-              'https://images.unsplash.com/photo-1527689368864-3a821dbccc34?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
-            }
+            src={landingBg }
           />
         </Flex>
       </Stack>

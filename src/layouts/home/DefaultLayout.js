@@ -24,6 +24,7 @@ import {
 import React from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../../providers/auth";
+import logo from "../../assets/img/logo/logo.png";
 
 const DefaultLayout = ({ children }) => {
   const navigate = useNavigate();
@@ -68,15 +69,18 @@ const DefaultLayout = ({ children }) => {
             />
           </Flex>
           <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-            <Text
-              textAlign={useBreakpointValue({ base: "center", md: "right" })}
-              color={useColorModeValue("gray.800", "white")}
-              fontSize={"2xl"}
-              fontWeight="extrabold"
-            >
-              شریف استارتر
-            </Text>
-
+            <Stack direction={"row"} spacing={6}>
+              <img src={logo} style={{ height: "100px" }}></img>
+              <Text
+                textAlign={useBreakpointValue({ base: "center", md: "right" })}
+                color={useColorModeValue("gray.800", "white")}
+                fontSize={"2xl"}
+                fontWeight="extrabold"
+                style={{  marginTop:"25px" }}
+              >
+                شریف استارتر
+              </Text>
+            </Stack>
             <Flex display={{ base: "none", md: "flex" }} ml={10}>
               <DesktopNav />
             </Flex>
@@ -100,12 +104,12 @@ const DefaultLayout = ({ children }) => {
             <Button
               display={{ base: "none", md: "inline-flex" }}
               width="100px"
-              height={'40px'}
+              height={"40px"}
               fontSize={"lg"}
               fontWeight={500}
               color={"white"}
               bg={textColor}
-              as={'a'}
+              as={"a"}
               href="/register"
               _hover={{
                 bg: textColor,
@@ -278,45 +282,6 @@ const MobileNavItem = ({ label, children, href }) => {
   );
 };
 
-const NAV_ITEMS = [
-  {
-    label: "Inspiration",
-    children: [
-      {
-        label: "Explore Design Work",
-        subLabel: "Trending Design to inspire you",
-        href: "#",
-      },
-      {
-        label: "New & Noteworthy",
-        subLabel: "Up-and-coming Designers",
-        href: "#",
-      },
-    ],
-  },
-  {
-    label: "Find Work",
-    children: [
-      {
-        label: "Job Board",
-        subLabel: "Find your dream design job",
-        href: "#",
-      },
-      {
-        label: "Freelance Projects",
-        subLabel: "An exclusive list for contract work",
-        href: "#",
-      },
-    ],
-  },
-  {
-    label: "Learn Design",
-    href: "#",
-  },
-  {
-    label: "Hire Designers",
-    href: "#",
-  },
-];
+const NAV_ITEMS = [];
 
 export default DefaultLayout;
