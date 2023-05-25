@@ -69,13 +69,13 @@ export default function Banner(props) {
           <Text
             color={textColorSecondary}
             fontSize="sm"
-            fontWeight="400"
+            fontWeight="bold"
             id="balance"
             mt="20px"
             me="10px"
             defaultValue="0x0"
           >
-            {walletAddress}{" "}
+            {walletAddress}
             <Button onClick={handleCopyClick}>
               <CopyIcon />
             </Button>
