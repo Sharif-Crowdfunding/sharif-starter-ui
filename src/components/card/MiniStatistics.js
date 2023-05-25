@@ -33,7 +33,7 @@ export default function MiniStatistics(props) {
             lineHeight="100%"
             color={textColorSecondary}
             fontSize={{
-              base: "sm",
+              base: "lg",
             }}
           >
             {name}
@@ -41,8 +41,9 @@ export default function MiniStatistics(props) {
           <StatNumber
             color={textColor}
             fontSize={{
-              base: "2xl",
+              base: "xl",
             }}
+            style={{direction:"ltr"}}
           >
             {value}
           </StatNumber>

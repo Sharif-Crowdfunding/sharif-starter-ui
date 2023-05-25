@@ -35,7 +35,7 @@ export default function NewProjectModal({onSubmit}) {
           onOpen();
         }}
       >
-        ساخت پروژه جدید
+            ساخت پروژه جدید    
       </Button>
       <Modal isCentered isOpen={isOpen} size={"3xl"} onClose={onClose}>
         {overlay}
