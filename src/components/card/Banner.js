@@ -1,14 +1,16 @@
 import React from "react";
 
 import { Button, Flex, Text } from "@chakra-ui/react";
+import CountdownTimer from "../CountdownTimer";
 
 
-export default function Banner({description,project}) {
+export default function Banner({description,project,time}) {
+  console.log(time,project,description)
   return (
     <Flex
       direction='column'
       bgImage={""}
-      bgColor='navy.400'
+      bgColor='secondaryGray.400'
       bgSize='cover'
       py={{ base: "30px", md: "56px" }}
       px={{ base: "30px", md: "64px" }}
@@ -27,8 +29,9 @@ export default function Banner({description,project}) {
         }}
         fontWeight='700'
         lineHeight={{ base: "32px", md: "42px" }}>
-        {project && project.name}
+        {"project" }
       </Text>
+      <CountdownTimer endTime={time}/>
       <Text
         fontSize='md'
         color='#E3DAFF'
@@ -43,7 +46,7 @@ export default function Banner({description,project}) {
         fontWeight='500'
         mb='40px'
         lineHeight='28px'>
-        {description}
+        {"description"}
       </Text>
       <Flex align='center'>
         <Button

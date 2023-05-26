@@ -25,7 +25,12 @@ const urls = {
     create: () => `${API_BASE_URL}/auction/create/`,
     market: () => `${API_BASE_URL}/auction/market/`,
     bid: () => `${API_BASE_URL}/auction/bid/`,
+    myBid: (id) => `${API_BASE_URL}/auction/mybid/${id}/`,
+    getBids: (id) => `${API_BASE_URL}/auction/bid/all/${id}/`,
     details: (id) => `${API_BASE_URL}/auction/details/${id}/`,
+    likeAuction: (id) => `${API_BASE_URL}/auction/like/${id}/`,
+    endAuction: (id) => `${API_BASE_URL}/auction/end/${id}/`,
+    cancelAuction: (id) => `${API_BASE_URL}/auction/cancel/${id}/`,
   },
   sale: {
     getProjects: () => `${API_BASE_URL}/user/info/`,
@@ -34,6 +39,7 @@ const urls = {
     buyToken: () => `${API_BASE_URL}/sale/participate`,
   },
   common: {
+    getMyPortfolio: () => `${API_BASE_URL}/user/portfolio`,
     joinWaitlist: () => `${API_BASE_URL}/join`,
     image: (address) => `${API_BASE_URL}/${address}`,
   },

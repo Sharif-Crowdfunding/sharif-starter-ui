@@ -8,9 +8,8 @@ import {
   Text,
   useColorModeValue,
   useToast,
+  Card,
 } from "@chakra-ui/react";
-
-import Card from "../../components/card/Card";
 
 import Nft5 from "./../../assets/img/nfts/Nft5.png";
 import Banner from "../../components/card/Banner";
@@ -25,6 +24,7 @@ import { useFetch } from "../../common/useFetch";
 import urls from "../../common/urls";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Bids, MyBid } from "../../components/card/Bid";
 
 export default function AuctionDetails({ id }) {
   const { state, dispatch } = useMarketReducer();
@@ -38,7 +38,7 @@ export default function AuctionDetails({ id }) {
     if (error) {
       console.log(error);
     }
-    if (data && data.length > 0) {
+    if (data && !loading) {
       dispatch({ type: AUCTION_DETAILS_SUCCESS, payload: data });
     }
   }, [error, data, loading]);
@@ -74,7 +74,16 @@ export default function AuctionDetails({ id }) {
           flexDirection="column"
           gridArea={{ xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2" }}
         >
-          <Banner />
+          <Banner
+            time={
+              state.auctionDetails.details &&
+              state.auctionDetails.details.end_time
+            }
+            project={
+              state.auctionDetails.details &&
+              state.auctionDetails.details.symbol
+            }
+          />
           <Card p="0px" my="1%">
             <Flex
               align={{ sm: "flex-start", lg: "center" }}
@@ -88,17 +97,7 @@ export default function AuctionDetails({ id }) {
               </Text>
               <Button variant="action">نمایش همه</Button>
             </Flex>
-
-            {state.auctionDetails.details &&
-              state.auctionDetails.details.bidders.map((e) => (
-                <HistoryItem
-                  name="Colorful Heaven"
-                  author="By Mark Benjamin"
-                  date="30s ago"
-                  image={Nft5}
-                  price="0.91 ETH"
-                />
-              ))}
+            <Bids id={id} />
           </Card>
         </Flex>
         <Flex
@@ -134,38 +133,9 @@ export default function AuctionDetails({ id }) {
               </Text>
             </Flex>
           </Card>
-          <MyBids textColor={textColor} />
+          <MyBid textColor={textColor} id={id} />
         </Flex>
       </Grid>
     </Box>
-  );
-}
-
-function MyBids({}) {
-  return (
-    <>
-      <Card p="0px" my="1%">
-        <Flex
-          align={{ sm: "flex-start", lg: "center" }}
-          justify="space-between"
-          w="100%"
-          px="22px"
-          py="18px"
-        >
-        
-        </Flex>
-      </Card>
-      <Card p="0px" my="1%">
-        <Flex
-          align={{ sm: "flex-start", lg: "center" }}
-          justify="space-between"
-          w="100%"
-          px="22px"
-          py="18px"
-        >
-          
-        </Flex>
-      </Card>
-    </>
   );
 }

@@ -303,10 +303,10 @@ const ShareholdersForm = ({ state, setState, token }) => {
               color: "gray.50",
             }}
           >
-            تعداد سهامداران
+            تعداد سهام‌داران
           </FormLabel>
-          <NumberInput max={10} min={1} onChange={(e) => setShareholdersNum(e)} dir="ltr">
-            <NumberInputField />
+          <NumberInput max={10} min={2} onChange={(e) => setShareholdersNum(e-2)} dir="ltr">
+            <NumberInputField value={2}/>
             <NumberInputStepper>
               <NumberIncrementStepper />
               <NumberDecrementStepper />
@@ -322,22 +322,34 @@ const ShareholdersForm = ({ state, setState, token }) => {
               color: "gray.50",
             }}
           >
-            فهرست سهامداران
+            فهرست سهام‌داران
           </FormLabel>
           <InputGroup size="sm" my={"5px"}>
             <Input
               mx={"5px"}
               type="number"
               disabled={true}
-              value={token}
+              value={token/5}
               focusBorderColor="brand.400"
               rounded="md"
-              onChange={(e) =>
-                setState({
-                  ...state,
-                  total_supply: parseInt(e.target.value),
-                })
-              }
+            />
+            <Input
+              mx={"5px"}
+              type="text"
+              disabled={true}
+              value="دانشگاه‌صنعتی شریف"
+              focusBorderColor="brand.400"
+              rounded="md"
+            />
+          </InputGroup>
+          <InputGroup size="sm" my={"5px"}>
+            <Input
+              mx={"5px"}
+              type="number"
+              disabled={true}
+              value={(token/5)*4}
+              focusBorderColor="brand.400"
+              rounded="md"
             />
             <Input
               mx={"5px"}
@@ -346,12 +358,6 @@ const ShareholdersForm = ({ state, setState, token }) => {
               value="خودم"
               focusBorderColor="brand.400"
               rounded="md"
-              onChange={(e) =>
-                setState({
-                  ...state,
-                  total_supply: parseInt(e.target.value),
-                })
-              }
             />
           </InputGroup>
 

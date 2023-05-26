@@ -10,15 +10,22 @@ import {
   Link,
   Text,
   useColorModeValue,
+  HStack,
+  Card,
   VStack,
+  useToast,
 } from "@chakra-ui/react";
-// Custom components
-import Card from "./Card.js";
-// Assets
 import React, { useState } from "react";
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
+import { useMarketReducer } from "../../providers/marketplace";
+import axios from "axios";
+import urls from "../../common/urls";
+import moment from "moment";
+import ImageWithOverlay from "../ImageOverlay";
 
 export default function Auction(props) {
+  const toast = useToast()
+  const { dispatch } = useMarketReducer();
   const {
     image,
     name,
@@ -28,20 +35,18 @@ export default function Auction(props) {
     saleToken,
     minimumbidpertoken,
     liked,
+    isMine,
+    endtime,
+    id,
+    inProgress,
   } = props;
-  const [like, setLike] = useState(liked);
   const textColor = useColorModeValue("navy.700", "white");
   const textColorBid = useColorModeValue("brand.500", "white");
   return (
-    <Card p="20px">
+    <Card p="20px" width="95%">
       <Flex direction={{ base: "column" }} justify="center">
         <Box mb={{ base: "20px", "2xl": "20px" }} position="relative">
-          <Image
-            src={image}
-            w={{ base: "100%", "3xl": "100%" }}
-            h={{ base: "100%", "3xl": "100%" }}
-            borderRadius="20px"
-          />
+          <ImageWithOverlay image={image} time={endtime} />
           <Button
             position="absolute"
             bg="white"
@@ -55,14 +60,15 @@ export default function Auction(props) {
             minW="36px"
             h="36px"
             onClick={() => {
-              setLike(!like);
+              likeAuction(id);
+              dispatch({ type: "LIKE_AUCTION", payload: id });
             }}
           >
             <Icon
               transition="0.2s linear"
               w="20px"
               h="20px"
-              as={like ? IoHeart : IoHeartOutline}
+              as={liked ? IoHeart : IoHeartOutline}
               color="brand.500"
             />
           </Button>
@@ -73,9 +79,9 @@ export default function Auction(props) {
             direction={{
               base: "row",
               md: "column",
-              lg: "row",
+              lg: "column",
               xl: "column",
-              "2xl": "row",
+              "2xl": "column",
             }}
             mb="auto"
           >
@@ -107,61 +113,47 @@ export default function Auction(props) {
                 {author}
               </Text>
             </Flex>
-            {/* <AvatarGroup
-              max={3}
-              color={textColorBid}
-              size='sm'
-              mt={{
-                base: "0px",
-                md: "10px",
-                lg: "0px",
-                xl: "10px",
-                "2xl": "0px",
-              }}
-              fontSize='12px'>
-              {bidders.map((avt, key) => (
-                <Avatar key={key} src={avt} />
-              ))}
-            </AvatarGroup> */}
           </Flex>
-          <Flex
-            align="start"
-            justify="space-between"
-            direction={{
-              base: "row",
-              md: "column",
-              lg: "row",
-              xl: "column",
-              "2xl": "row",
-            }}
-            mt="25px"
-          >
-            <VStack>
+          <VStack mb="5%">
+            <HStack>
               <Text fontWeight="500" fontSize="sm" color={textColorBid}>
-                کمترین پیشنهاد ممکن: ETH {minimumbidpertoken / 10 ** 18}
+                تعداد توکن حراج:{" "}
               </Text>
               <Text fontWeight="500" fontSize="sm" color={textColorBid}>
-                تعداد توکن حراج: {saleToken}
+                {saleToken}
               </Text>
-            </VStack>
-            <Text fontWeight="700" fontSize="sm" color={textColorBid}>
-              بالاترین پیشنهاد: ETH {getMaxBid(bidders)}
-            </Text>
-              <Button
-                variant="darkBrand"
-                color="white"
-                fontSize="sm"
-                fontWeight="500"
-                borderRadius="70px"
-                px="24px"
-                py="5px"
-                onClick={onBid}
-              >
-                ثبت پیشنهاد
-              </Button>
-          </Flex>
+            </HStack>
+            <HStack>
+              <Text fontWeight="500" fontSize="sm" color={textColorBid}>
+                کمترین پیشنهاد ممکن:
+              </Text>
+              <Text fontWeight="500" fontSize="sm" color={textColorBid}>
+                ETH {minimumbidpertoken / 10 ** 18}
+              </Text>
+            </HStack>
+            {/* <HStack>
+              <Text fontWeight="500" fontSize="sm" color={textColorBid}>
+                بالاترین پیشنهاد:
+              </Text>
+              <Text fontWeight="700" fontSize="sm" color={textColorBid}>
+                ETH {getMaxBid(bidders)}
+              </Text>
+            </HStack> */}
+          </VStack>
         </Flex>
       </Flex>
+      {isMine && inProgress && getMyAction(endtime, id, dispatch,toast)}
+      <Button
+        variant="darkBrand"
+        color="white"
+        fontSize="sm"
+        fontWeight="500"
+        px="24px"
+        py="5px"
+        onClick={onBid}
+      >
+        مشاهده
+      </Button>{" "}
     </Card>
   );
 }
@@ -172,4 +164,69 @@ function getMaxBid(bidders) {
     if (element.total_value > max) max = element.total_value;
   }
   return max;
+}
+function likeAuction(id) {
+  axios.get(urls.auction.likeAuction(id), "GET");
+}
+
+function getMyAction(endtime, id, dispatch,toast) {
+  const deadline = moment.unix(endtime);
+  const now = moment();
+  const diff = deadline.diff(now);
+  if (diff > 0)
+    return (
+      <Button
+        mb="5px"
+        variant="solid"
+        colorScheme="red"
+        fontSize="sm"
+        fontWeight="500"
+        px="24px"
+        py="5px"
+        onClick={() => {
+          axios.get(urls.auction.cancelAuction(id));
+          dispatch({ type: "CANCEL_AUCTION", payload: id });
+          toast({
+            title: "عملیات با موفقیت انجام شد.  ",
+            status: "success",
+            position: "bottom-right",
+            duration: 9000,
+            isClosable: true,
+            containerStyle: {
+              direction: "rtl",
+            },
+          });
+        }}
+      >
+        لغو حراجی
+      </Button>
+    );
+  else
+    return (
+      <Button
+        mb="5px"
+        variant="solid"
+        colorScheme="teal"
+        fontSize="sm"
+        fontWeight="500"
+        px="24px"
+        py="5px"
+        onClick={() => {
+          axios.get(urls.auction.endAuction(id));
+          dispatch({ type: "END_AUCTION", payload: id });
+          toast({
+            title: "عملیات با موفقیت انجام شد.  ",
+            status: "success",
+            position: "bottom-right",
+            duration: 9000,
+            isClosable: true,
+            containerStyle: {
+              direction: "rtl",
+            },
+          });
+        }}
+      >
+        اتمام حراجی
+      </Button>
+    );
 }
