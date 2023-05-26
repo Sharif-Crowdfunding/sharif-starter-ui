@@ -23,6 +23,7 @@ import {
 import React, { useState } from "react";
 
 import { useToast } from "@chakra-ui/react";
+import UploadFile from "../upload/ImageDropdown";
 const Project = ({ state, setState }) => {
   return (
     <Box>
@@ -67,7 +68,6 @@ const Project = ({ state, setState }) => {
           >
             آدرس عکس
           </FormLabel>
-          
           <InputGroup size="sm">
             <Input
               type="text"
@@ -168,7 +168,21 @@ const BasicInfo = ({ state, setState }) => {
               color: "gray.50",
             }}
           >
-            آدرس گیتهاب
+            مستندات فنی(whitepaper) 
+          </FormLabel>
+          <UploadFile />
+          </FormControl>
+
+          <FormControl as={GridItem} colSpan={[3, 2]}>
+          <FormLabel
+            fontSize="sm"
+            fontWeight="md"
+            color="gray.700"
+            _dark={{
+              color: "gray.50",
+            }}
+          >
+            آدرس گیتهاب 
           </FormLabel>
           <InputGroup size="sm">
             <Input

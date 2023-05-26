@@ -12,6 +12,8 @@ const initialState = {
   walletAddress: "",
   ethBalance: 0,
   tokens: [],
+  auctionNum:0,
+  projectNum:0
 };
 
 const walletReducer = (state = initialState, action) => {
@@ -28,6 +30,8 @@ const walletReducer = (state = initialState, action) => {
         walletAddress: data.address,
         ethBalance: data.balance,
         tokens: data.tokens,
+        auctionNum: data.auction_number,
+        projectNum: data.project_number,
       };
     case REFRESH_ERROR:
       return {

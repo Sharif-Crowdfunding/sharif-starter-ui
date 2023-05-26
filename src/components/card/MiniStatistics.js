@@ -16,6 +16,7 @@ import React from "react";
 
 export default function MiniStatistics(props) {
   const { startContent, endContent, name, value, secondValue } = props;
+  console.log(value)
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "secondaryGray.600";
 

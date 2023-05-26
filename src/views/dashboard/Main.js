@@ -120,7 +120,7 @@ export default function Main() {
             />
           }
           name="تعداد حراجی ها"
-          value="1"
+          value={state.auctionNum}
         />
         <MiniStatistics
           startContent={
@@ -134,7 +134,7 @@ export default function Main() {
             />
           }
           name="تعداد پروژه ها"
-          value="1"
+          value={state.projectNum}
         />
       </SimpleGrid>
 

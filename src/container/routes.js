@@ -1,6 +1,7 @@
 // Auth Imports
 import { Navigate } from "react-router-dom";
 import AuthIllustration from "../layouts/auth/Default";
+import InfoLayout from "../layouts/info/InfoLayout";
 import DashboardLayout from "../layouts/dashboard/Dashbord";
 import DefaultLayout from "../layouts/home/DefaultLayout";
 import Register from "../views/auth/Register";
@@ -31,7 +32,7 @@ const routes = [
   {
     path: "/d/details/:id",
     exact: false,
-    layout: DashboardLayout,
+    layout: InfoLayout,
     component: Details,
   },
   {

@@ -17,14 +17,18 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
+import { FaShareAlt } from "react-icons/fa";
+
 import { useMarketReducer } from "../../providers/marketplace";
 import axios from "axios";
 import urls from "../../common/urls";
 import moment from "moment";
 import ImageWithOverlay from "../ImageOverlay";
+import { useNavigate } from "react-router-dom";
 
 export default function Auction(props) {
-  const toast = useToast()
+  const toast = useToast();
+
   const { dispatch } = useMarketReducer();
   const {
     image,
@@ -40,6 +44,25 @@ export default function Auction(props) {
     id,
     inProgress,
   } = props;
+  const handleCopyClick = async () => {
+    try {
+      await navigator.clipboard.writeText(
+        "http://localhost:3000/d/details/" + id
+      );
+      toast({
+        title: "کپی شد",
+        status: "success",
+        position: "bottom-right",
+        duration: 9000,
+        isClosable: true,
+        containerStyle: {
+          direction: "rtl",
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const textColor = useColorModeValue("navy.700", "white");
   const textColorBid = useColorModeValue("brand.500", "white");
   return (
@@ -69,6 +92,30 @@ export default function Auction(props) {
               w="20px"
               h="20px"
               as={liked ? IoHeart : IoHeartOutline}
+              color="brand.500"
+            />
+          </Button>
+          <Button
+            position="absolute"
+            bg="white"
+            _hover={{ bg: "whiteAlpha.900" }}
+            _active={{ bg: "white" }}
+            _focus={{ bg: "white" }}
+            p="0px !important"
+            top="14px"
+            left="14px"
+            borderRadius="50%"
+            minW="36px"
+            h="36px"
+            onClick={() => {
+              handleCopyClick();
+            }}
+          >
+            <Icon
+              transition="0.2s linear"
+              w="20px"
+              h="20px"
+              as={FaShareAlt}
               color="brand.500"
             />
           </Button>
@@ -142,7 +189,7 @@ export default function Auction(props) {
           </VStack>
         </Flex>
       </Flex>
-      {isMine && inProgress && getMyAction(endtime, id, dispatch,toast)}
+      {isMine && inProgress && getMyAction(endtime, id, dispatch, toast)}
       <Button
         variant="darkBrand"
         color="white"
@@ -169,7 +216,7 @@ function likeAuction(id) {
   axios.get(urls.auction.likeAuction(id), "GET");
 }
 
-function getMyAction(endtime, id, dispatch,toast) {
+function getMyAction(endtime, id, dispatch, toast) {
   const deadline = moment.unix(endtime);
   const now = moment();
   const diff = deadline.diff(now);
