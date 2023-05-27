@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Icon, Image, Text, useColorModeValue } from "@chakra-ui/react";
+import { Flex, Icon, Image, Text, useColorModeValue,Avatar } from "@chakra-ui/react";
 
 import Card from "./Card";
 import { FaEthereum } from "react-icons/fa";
@@ -22,7 +22,7 @@ export default function HistoryItem(props) {
       transition='0.2s linear'>
       <Flex direction={{ base: "column" }} justify='center'>
         <Flex position='relative' align='center'>
-          <Image src={image} w='66px' h='66px' borderRadius='20px' me='16px' />
+          <Avatar w='66px' h='66px' borderRadius='20px' me='16px' />
           <Flex
             direction='column'
             w={{ base: "70%", md: "100%" }}
