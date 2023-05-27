@@ -12,13 +12,14 @@ const CountdownTimer = ({endTime}) => {
   });
 
   function calculateCountdown(endtime){
-    const deadline = moment.unix(endtime);
-    const now = moment();
-    const diff = deadline.diff(now);
+    const deadline = endtime;
+    const now = moment().unix();
+    const diff = deadline-now;
     let title = "";
     if (diff > 0) {
       title = "زمان باقی‌مانده تا پایان حراج";
-      const duration = moment.duration(diff);
+      const duration = moment.duration(diff*1000);
+      console.log(duration)
 
       setCountdown({
         title: title,
