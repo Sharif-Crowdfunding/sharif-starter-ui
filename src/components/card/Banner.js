@@ -8,7 +8,7 @@ export default function Banner({ time, project }) {
    
   return (
     <Card>
-      <Box >
+      <Box bg="#190793f2" w="100%" p={4} color="white" style={{borderRadius:"20px"}}>
         <CountdownTimer />
       </Box>
       <CardHeader>
