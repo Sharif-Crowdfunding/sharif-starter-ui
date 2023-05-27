@@ -50,8 +50,8 @@ export default function Footer() {
         align={"center"}
       >
         <Stack direction={"row"} spacing={6}>
-          <img src={logo} style={{ height: "145px" }}></img>
-          <img src={sharifLogo} style={{ height: "85px", marginTop:"25px" }}></img>
+          <img src={logo} style={{ height: "95px" }}></img>
+          <img src={sharifLogo} style={{ height: "85px", marginTop:"8px" }}></img>
         </Stack>
 
         <Stack direction={"row"} spacing={6}>

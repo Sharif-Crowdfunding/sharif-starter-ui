@@ -70,13 +70,13 @@ const DefaultLayout = ({ children }) => {
           </Flex>
           <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
             <Stack direction={"row"} spacing={6}>
-              <img src={logo} style={{ height: "100px" }}></img>
+              <img src={logo} style={{ height: "60px" }}></img>
               <Text
                 textAlign={useBreakpointValue({ base: "center", md: "right" })}
                 color={useColorModeValue("gray.800", "white")}
                 fontSize={"2xl"}
                 fontWeight="extrabold"
-                style={{  marginTop:"25px" }}
+                style={{  marginTop:"10px" }}
               >
                 شریف استارتر
               </Text>

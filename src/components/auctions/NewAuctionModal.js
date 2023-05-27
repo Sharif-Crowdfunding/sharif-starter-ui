@@ -35,7 +35,7 @@ export default function NewAuctionModal({onSubmit,symbol}) {
       <Modal isCentered isOpen={isOpen} size={"3xl"} onClose={onClose}>
         {overlay}
         <ModalContent dir="rtl">
-          <ModalHeader>ساخت حراج</ModalHeader>
+          <ModalHeader style={{paddingRight:"80px"}} >ساخت حراج</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <AuctionForm

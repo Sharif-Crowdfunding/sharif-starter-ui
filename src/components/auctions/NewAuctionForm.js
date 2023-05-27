@@ -197,8 +197,8 @@ export default function AuctionForm({ onSubmit, symbol }) {
                   setProgress(progress - 50);
                 }}
                 isDisabled={step === 1}
-                colorScheme="teal"
-                variant="solid"
+                colorScheme="blue"
+                variant="outline"
                 w="7rem"
                 mr="5%"
               >
@@ -215,8 +215,8 @@ export default function AuctionForm({ onSubmit, symbol }) {
                     setProgress(progress + 50);
                   }
                 }}
-                colorScheme="teal"
-                variant="outline"
+                colorScheme="blue"
+                variant="solid"
               >
                 بعد
               </Button>
@@ -224,7 +224,7 @@ export default function AuctionForm({ onSubmit, symbol }) {
             {step === 2 ? (
               <Button
                 w="7rem"
-                colorScheme="red"
+                colorScheme="green"
                 variant="solid"
                 onClick={() => {
                   onSubmit(auction);

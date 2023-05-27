@@ -7,12 +7,12 @@ import {
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import landingBg from "../../assets/img/home/CROWDFUNDING.jpg";
+import landingBg from "../../assets/img/home/CROWDFUNDING.png";
 
 export default function Hero() {
   return (
     <div dir="rtl">
-      <Stack minH={"80vh"} direction={{ base: "column", md: "row" }}>
+      <Stack minH={"85vh"} direction={{ base: "column", md: "row" }}>
         <Flex
           p={8}
           flex={1}
