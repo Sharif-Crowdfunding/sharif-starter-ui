@@ -44,14 +44,7 @@ const AuctionTimeForm = ({ state, setState }) => {
               placeholder="زمان شروع حراجی را وارد کنید..."
               focusBorderColor="brand.400"
               rounded="md"
-              onChange={(e) =>
-                setState({
-                  ...state,
-                  start_time: Math.floor(
-                    new Date(e.target.value).getTime() / 1000
-                  ),
-                })
-              }
+              onChange={(e) =>{}}
             />{" "}
           </InputGroup>
         </FormControl>{" "}
@@ -64,18 +57,17 @@ const AuctionTimeForm = ({ state, setState }) => {
               color: "gray.50",
             }}
           >
-            زمان پایان حراج
+            طول مدت حراج
           </FormLabel>
           <InputGroup size="sm">
             <Input
-              type="time"
-              placeholder="طول مدت حراجی راوارد کنید..."
+              placeholder="طول مدت حراجی (به دقیقه) راوارد کنید..."
               focusBorderColor="brand.400"
               rounded="md"
               onChange={(e) =>
                 setState({
                   ...state,
-                  end_time: state.start_time + getSecond(e.target.value),
+                  duration: parseInt(e.target.value)*60 ,
                 })
               }
             />{" "}
