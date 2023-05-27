@@ -72,8 +72,8 @@ export function MyBid({ id }) {
           >
             <VStack>
               <Text>تعداد توکن:{state[0].token_num}</Text>
-              <Text>قیمت هر توکن:{state[0].token_val}</Text>
-              <Text>کل مبلغ پیشنهادی: {state[0].total_val}</Text>
+              <Text>قیمت هر توکن:{state[0].token_val/(10**15)}</Text>
+              <Text>کل مبلغ پیشنهادی: {state[0].total_val/(10**15)}</Text>
             </VStack>
             <Button colorScheme="red" h={"90%"}>
               حذف
