@@ -81,7 +81,7 @@ export default function AuctionDetails({ id }) {
             }
             project={
               state.auctionDetails.details &&
-              state.auctionDetails.details.symbol
+              state.auctionDetails.details.project
             }
           />
           <Card p="0px" my="1%">
