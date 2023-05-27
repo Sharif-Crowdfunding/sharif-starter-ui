@@ -220,60 +220,60 @@ function getMyAction(endtime, id, dispatch, toast) {
   const deadline = moment.unix(endtime);
   const now = moment();
   const diff = deadline.diff(now);
-  if (diff > 0)
     return (
-      <Button
-        mb="5px"
-        variant="solid"
-        colorScheme="red"
-        fontSize="sm"
-        fontWeight="500"
-        px="24px"
-        py="5px"
-        onClick={() => {
-          axios.get(urls.auction.cancelAuction(id));
-          dispatch({ type: "CANCEL_AUCTION", payload: id });
-          toast({
-            title: "عملیات با موفقیت انجام شد.  ",
-            status: "success",
-            position: "bottom-right",
-            duration: 9000,
-            isClosable: true,
-            containerStyle: {
-              direction: "rtl",
-            },
-          });
-        }}
-      >
-        لغو حراجی
-      </Button>
-    );
-  else
-    return (
-      <Button
-        mb="5px"
-        variant="solid"
-        colorScheme="teal"
-        fontSize="sm"
-        fontWeight="500"
-        px="24px"
-        py="5px"
-        onClick={() => {
-          axios.get(urls.auction.endAuction(id));
-          dispatch({ type: "END_AUCTION", payload: id });
-          toast({
-            title: "عملیات با موفقیت انجام شد.  ",
-            status: "success",
-            position: "bottom-right",
-            duration: 9000,
-            isClosable: true,
-            containerStyle: {
-              direction: "rtl",
-            },
-          });
-        }}
-      >
-        اتمام حراجی
-      </Button>
+      <>
+        <Button
+          isDisabled={diff > 0}
+          mb="5px"
+          variant="solid"
+          colorScheme="teal"
+          fontSize="sm"
+          fontWeight="500"
+          px="24px"
+          py="5px"
+          onClick={() => {
+            axios.get(urls.auction.endAuction(id));
+            dispatch({ type: "END_AUCTION", payload: id });
+            toast({
+              title: "عملیات با موفقیت انجام شد.  ",
+              status: "success",
+              position: "bottom-right",
+              duration: 9000,
+              isClosable: true,
+              containerStyle: {
+                direction: "rtl",
+              },
+            });
+          }}
+        >
+          اتمام حراجی
+        </Button>
+        <Button
+          isDisabled={diff <= 0}
+          mb="5px"
+          variant="solid"
+          colorScheme="red"
+          fontSize="sm"
+          fontWeight="500"
+          px="24px"
+          py="5px"
+          onClick={() => {
+            axios.get(urls.auction.cancelAuction(id));
+            dispatch({ type: "CANCEL_AUCTION", payload: id });
+            toast({
+              title: "عملیات با موفقیت انجام شد.  ",
+              status: "success",
+              position: "bottom-right",
+              duration: 9000,
+              isClosable: true,
+              containerStyle: {
+                direction: "rtl",
+              },
+            });
+          }}
+        >
+          لغو حراجی
+        </Button>
+      </>
     );
 }
