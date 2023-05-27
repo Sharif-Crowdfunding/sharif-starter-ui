@@ -49,6 +49,7 @@ export default function NewBid({ onSubmit,id  }) {
             />
           </InputGroup>
         </FormControl>
+
         <FormControl as={GridItem} colSpan={[3, 2]}>
           <FormLabel
             fontSize="sm"
@@ -58,7 +59,7 @@ export default function NewBid({ onSubmit,id  }) {
               color: "gray.50",
             }}
           >
-            ارزش هر توکن (بر اساس Wei)
+            ارزش هر توکن (بر اساس ریال)
           </FormLabel>
           <InputGroup size="sm">
             <Input
@@ -69,9 +70,33 @@ export default function NewBid({ onSubmit,id  }) {
                 onChange={(e) =>
                   setState({
                     ...state,
-                    total_val: parseInt(e.target.value)*state.token_num,
-                  })
-                }
+                    total_val: parseInt(e.target.value)*state.token_num* Math.pow(10, 15),
+                })}
+            />
+          </InputGroup>{" "}
+          <FormHelperText>
+            {parseFloat(state.total_val) / 10 ** 18} اتریوم
+          </FormHelperText>
+        </FormControl>
+        <FormControl as={GridItem} colSpan={[3, 2]}>
+          <FormLabel
+            fontSize="sm"
+            fontWeight="md"
+            color="gray.700"
+            _dark={{
+              color: "gray.50",
+            }}
+          >
+           ارزش کل پیشنهاد
+          </FormLabel>
+          <InputGroup size="sm">
+            <Input
+            disabled="disabled"
+            value={state.total_val/ Math.pow(10, 15)}
+              type="number"
+              focusBorderColor="brand.400"
+              rounded="md"
+              
             />
           </InputGroup>{" "}
           <FormHelperText>

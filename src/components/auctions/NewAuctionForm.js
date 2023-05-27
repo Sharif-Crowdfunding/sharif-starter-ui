@@ -127,7 +127,7 @@ const BasicAuctionInfo = ({ state, setState }) => {
               color: "gray.50",
             }}
           >
-            ارزش هر توکن (بر اساس Wei)
+            ارزش هر توکن (بر اساس ریال)
           </FormLabel>
           <InputGroup size="sm">
             <Input
@@ -138,7 +138,7 @@ const BasicAuctionInfo = ({ state, setState }) => {
               onChange={(e) =>
                 setState({
                   ...state,
-                  minimum_value_per_token: parseInt(e.target.value),
+                  minimum_value_per_token: parseInt(e.target.value )* Math.pow(10, 15),
                 })
               }
             />

@@ -98,16 +98,9 @@ export default function Main() {
       >
         <GridItem colSpan={2}>
           <MiniStatistics
-            endContent={
-              <Flex me="-16px" mt="10px">
-                <FormLabel htmlFor="balance">
-                  <Avatar src={ETH} />
-                </FormLabel>
-              </Flex>
-            }
             name="موجودی حساب"
-            value={state.ethBalance}
-            secondValue = "ETH"
+            value={state.ethBalance*1000}
+            secondValue = "ریال"
           />
         </GridItem>
         <MiniStatistics

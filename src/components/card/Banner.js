@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import {  Text, Card, CardHeader, CardBody, Heading, Stack, Box, StackDivider, Image } from "@chakra-ui/react";
 import CountdownTimer from "../CountdownTimer";

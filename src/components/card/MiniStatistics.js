@@ -16,7 +16,7 @@ import React from "react";
 
 export default function MiniStatistics(props) {
   const { startContent, endContent, name, value, secondValue } = props;
-  console.log(value)
+  console.log(value);
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "secondaryGray.600";
 
@@ -47,10 +47,12 @@ export default function MiniStatistics(props) {
             }}
             style={{ direction: "ltr" }}
           >
-            <Stack direction={"row"} >
-            <Text >{value}</Text> <Text style={{marginTop:"15px"}} fontSize={{ base: "sm" }}>{secondValue}</Text>
-        </Stack>
-              
+            <Stack direction={"row"}>
+            <Text style={{ marginTop: "15px" }} fontSize={{ base: "sm" }}>
+                {secondValue}
+              </Text>
+              <Text>{value}</Text>{" "}
+            </Stack>
           </StatNumber>
         </Stat>
         <Flex ms="auto" w="max-content">
