@@ -41,7 +41,6 @@ const marketReducer = (state = initialState, action) => {
         isLoading: true,
         auctionDetails: {
           id: action.payload,
-          details: null,
         },
       };
     case AUCTION_DETAILS_SUCCESS:

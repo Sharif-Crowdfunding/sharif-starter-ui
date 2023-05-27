@@ -15,7 +15,7 @@ import urls from "../../common/urls";
 import HistoryItem from "./HistoryItem";
 
 export function Bids({ id }) {
-  const { data, error, loading } = useFetch(urls.auction.myBid(id), "GET");
+  const { data, error, loading } = useFetch(urls.auction.getBids(id), "GET");
   const [bids, setBids] = useState();
   useEffect(() => {
     if (error) {
@@ -35,7 +35,7 @@ export function Bids({ id }) {
         bids &&
         bids.map((b) => (
             <HistoryItem
-            name={b.bidder}
+            name={b.bidder.username}
             author={"تعداد توکن: " + b.token_num }
             // date={b.token_num}
             image={Avatar}
