@@ -12,9 +12,9 @@ export default function Banner({ time, project }) {
         <CountdownTimer />
       </Box>
       <CardHeader>
-        <Heading size="md" fontFamily={"MyShFont"}>{project?.name}</Heading>
+        <Heading size="md" fontFamily={"MyShFont"} style={{textAlign: "center"}}>  عنوان پروژه: {project?.name}</Heading>
       </CardHeader>
-       <Image src={project?.image} style={{height: "230px"}}/>
+       <Image src={project?.image} style={{height: "25%", alignSelf:"center"}}/>
       <CardBody>
         <Stack divider={<StackDivider />} spacing="4">
           <Box>
