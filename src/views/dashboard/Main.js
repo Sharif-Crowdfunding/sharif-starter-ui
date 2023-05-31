@@ -99,7 +99,7 @@ export default function Main() {
         <GridItem colSpan={2}>
           <MiniStatistics
             name="موجودی حساب"
-            value={state.ethBalance*1000}
+            value={parseInt(state.ethBalance*1000)}
             secondValue = "ریال"
           />
         </GridItem>
