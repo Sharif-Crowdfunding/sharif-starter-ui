@@ -36,7 +36,7 @@ export default function Banner({ time, project }) {
             style={{ textAlign: "center" }}
           >
             {" "}
-            عنوان پروژه: {project?.name}
+             پروژه {project?.name}
           </Heading>
         </CardHeader>
         <Image
@@ -103,6 +103,19 @@ export default function Banner({ time, project }) {
               </Heading>
               <Text pt="2" fontSize="sm">
                 {project?.details}
+              </Text>
+            </Box>
+            <Box>
+              <Heading
+                size="xs"
+                textTransform="uppercase"
+                fontFamily={"MyShFont"}
+              >
+                 سپیدنامه (white paper)
+              </Heading>
+              <Text pt="2" fontSize="sm">
+              <a href="https://coiniran.com/wp-content/uploads/2018/05/ethereum-whitepaper.pdf" >لینک توضیحات فنی پروژه</a>
+                
               </Text>
             </Box>
           </Stack>
