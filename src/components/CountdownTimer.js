@@ -47,7 +47,7 @@ const CountdownTimer = ({endTime}) => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [endTime]);
 
   return (
     <Box textAlign="center">
