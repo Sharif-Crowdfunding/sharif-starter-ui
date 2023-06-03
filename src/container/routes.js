@@ -9,7 +9,7 @@ import SignIn from "../views/auth/SignIn";
 import Dashboard from "./Dashboard";
 import Details from "./Details";
 import Home from "./Home";
-// import Authenticate from "./Authentication";
+
 const routes = [
   {
     path: "/login",
@@ -53,41 +53,6 @@ const routes = [
     layout: DefaultLayout,
     component: Home,
   },
-  // {
-  //   path: "/auth/:section",
-  //   layout: DefaultLayout,
-  //   component: Authenticate,
-  // },
-  // {
-  //   path: "/dashboard",
-  //   layout: DashboardLayout,
-  //   component: Dashboard,
-  // },
-  // {
-  //   path: "/dashboard/:section",
-  //   layout: DashboardLayout,
-  //   component: Dashboard,
-  // },
-  // {
-  //   path: "/dashboard/projects/:id",
-  //   layout: DashboardLayout,
-  //   component: CompleteProject,
-  // },
-  // {
-  //   path: "/projects",
-  //   layout: DefaultLayout,
-  //   component: Projects,
-  // },
-  // {
-  //   path: "/projects/:id",
-  //   layout: DefaultLayout,
-  //   component: Projects,
-  // },
-  // {
-  //   path: "*",
-  //   layout: DefaultLayout,
-  //   component: Home,
-  // },
 ];
 
 export default routes;
