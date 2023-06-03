@@ -37,9 +37,8 @@ export function Bids({ id }) {
             <HistoryItem
             name={b.bidder.username}
             author={"تعداد توکن: " + b.token_num }
-            // date={b.token_num}
             image={Avatar}
-            price={b.total_val/(10**18) + " ETH"}
+            price={b.total_val}
           />
         ))
       )}

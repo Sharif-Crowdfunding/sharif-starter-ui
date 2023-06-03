@@ -1,5 +1,13 @@
 import React from "react";
-import { Flex, Icon, Image, Text, useColorModeValue,Avatar } from "@chakra-ui/react";
+import {
+  Flex,
+  Icon,
+  Image,
+  Stack,
+  Text,
+  useColorModeValue,
+  Avatar,
+} from "@chakra-ui/react";
 
 import Card from "./Card";
 import { FaEthereum } from "react-icons/fa";
@@ -15,47 +23,52 @@ export default function HistoryItem(props) {
   return (
     <Card
       _hover={bgItem}
-      bg='transparent'
-      boxShadow='unset'
-      px='24px'
-      py='21px'
-      transition='0.2s linear'>
-      <Flex direction={{ base: "column" }} justify='center'>
-        <Flex position='relative' align='center'>
-          <Avatar w='66px' h='66px' borderRadius='20px' me='16px' />
+      bg="transparent"
+      boxShadow="unset"
+      px="24px"
+      py="21px"
+      transition="0.2s linear"
+    >
+      <Flex direction={{ base: "column" }} justify="center">
+        <Flex position="relative" align="center">
+          <Avatar w="66px" h="66px" borderRadius="20px" me="16px" />
           <Flex
-            direction='column'
+            direction="column"
             w={{ base: "70%", md: "100%" }}
-            me={{ base: "4px", md: "32px", xl: "10px", "3xl": "32px" }}>
+            me={{ base: "4px", md: "32px", xl: "10px", "3xl": "32px" }}
+          >
             <Text
               color={textColor}
               fontSize={{
                 base: "md",
               }}
-              mb='5px'
-              fontWeight='bold'
-              me='14px'>
+              mb="5px"
+              fontWeight="bold"
+              me="14px"
+            >
               {name}
             </Text>
             <Text
-              color='secondaryGray.600'
+              color="secondaryGray.600"
               fontSize={{
                 base: "sm",
               }}
-              fontWeight='400'
-              me='14px'>
+              fontWeight="400"
+              me="14px"
+            >
               {author}
             </Text>
           </Flex>
-          <Flex
-            me={{ base: "4px", md: "32px", xl: "10px", "3xl": "32px" }}
-            align='center'>
-            {/* <Icon as={FaEthereum} color={textColor} width='9px' me='7px' /> */}
-            <Text fontWeight='700' fontSize='md' color={textColor}>
-              {price*1000}
+          <Stack direction={"row"}>
+          <Text fontWeight="700" fontSize="md" color={textColor}>
+              {price / Math.pow(10, 15)}
+            </Text>{" "}
+            <Text  fontSize={{ base: "sm" }}>
+              ریال
             </Text>
-          </Flex>
-          <Text ms='auto' fontWeight='700' fontSize='sm' color={textColorDate}>
+          </Stack>
+          
+          <Text ms="auto" fontWeight="700" fontSize="sm" color={textColorDate}>
             {date}
           </Text>
         </Flex>

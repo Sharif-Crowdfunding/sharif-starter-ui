@@ -175,17 +175,9 @@ export default function Auction(props) {
                 کمترین پیشنهاد ممکن:
               </Text>
               <Text fontWeight="500" fontSize="sm" color={textColorBid}>
-                ETH {minimumbidpertoken / 10 ** 18}
+                 {minimumbidpertoken / 10 ** 18} ریال
               </Text>
             </HStack>
-            {/* <HStack>
-              <Text fontWeight="500" fontSize="sm" color={textColorBid}>
-                بالاترین پیشنهاد:
-              </Text>
-              <Text fontWeight="700" fontSize="sm" color={textColorBid}>
-                ETH {getMaxBid(bidders)}
-              </Text>
-            </HStack> */}
           </VStack>
         </Flex>
       </Flex>

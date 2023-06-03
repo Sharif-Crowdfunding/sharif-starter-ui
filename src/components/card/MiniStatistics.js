@@ -1,5 +1,3 @@
-// Chakra imports
-// Chakra imports
 import {
   Stack,
   Flex,
@@ -9,9 +7,7 @@ import {
   useColorModeValue,
   Text,
 } from "@chakra-ui/react";
-// Custom components
 import Card from "../card/Card.js";
-// Custom icons
 import React from "react";
 
 export default function MiniStatistics(props) {
@@ -48,7 +44,7 @@ export default function MiniStatistics(props) {
             style={{ direction: "ltr" }}
           >
             <Stack direction={"row"}>
-            <Text style={{ marginTop: "15px" }} fontSize={{ base: "sm" }}>
+              <Text style={{ marginTop: "15px" }} fontSize={{ base: "sm" }}>
                 {secondValue}
               </Text>
               <Text>{value}</Text>{" "}

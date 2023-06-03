@@ -58,7 +58,8 @@ export default function AuctionDetails({ id }) {
           },
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .then(() => window.location.reload());
   }
 
   const textColor = useColorModeValue("secondaryGray.900", "white");

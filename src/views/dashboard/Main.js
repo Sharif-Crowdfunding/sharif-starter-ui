@@ -20,7 +20,6 @@ import ColumnsTable from "../../components/ColumnsTable";
 import IconBox from "../../components/icons/IconBox";
 import { useWalletReducer } from "../../providers/wallet";
 
-import ETH from "./../../assets/img/dashboards/eth_image.png";
 export default function Main() {
   const { state, refresh } = useWalletReducer();
   const toast = useToast();

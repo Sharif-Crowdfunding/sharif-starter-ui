@@ -55,3 +55,7 @@ body {
 option {
   color: black;
 }
+
+a:hover {
+  color: rgb(0, 132, 255);
+}

@@ -19,7 +19,6 @@ const CountdownTimer = ({endTime}) => {
     if (diff > 0) {
       title = "زمان باقی‌مانده تا پایان حراج";
       const duration = moment.duration(diff*1000);
-      console.log(duration)
 
       setCountdown({
         title: title,
