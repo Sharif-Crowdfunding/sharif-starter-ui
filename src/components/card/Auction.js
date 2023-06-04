@@ -175,7 +175,7 @@ export default function Auction(props) {
                 کمترین پیشنهاد ممکن:
               </Text>
               <Text fontWeight="500" fontSize="sm" color={textColorBid}>
-                 {minimumbidpertoken / 10 ** 18} ریال
+                 {minimumbidpertoken / 10 ** 15} ریال
               </Text>
             </HStack>
           </VStack>

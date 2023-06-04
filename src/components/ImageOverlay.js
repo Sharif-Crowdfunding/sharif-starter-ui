@@ -25,6 +25,7 @@ export default function ImageWithOverlay({image,time}) {
           alt="My Image"
           borderRadius="20px"
           filter={isHovered ? "blur(3px)" : "none"}
+          style={{height:"150px"}}
         />
         {isHovered && (
           <Box

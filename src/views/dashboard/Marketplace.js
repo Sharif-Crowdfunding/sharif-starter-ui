@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-
 import {
   Box,
   Flex,
@@ -10,11 +9,8 @@ import {
   useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
-
 import Auction from "../../components/card/Auction";
-
 import { useNavigate } from "react-router-dom";
-import Nft3 from "../../assets/img/nfts/Nft3.png";
 import urls from "../../common/urls";
 import { useFetch } from "../../common/useFetch";
 import {
