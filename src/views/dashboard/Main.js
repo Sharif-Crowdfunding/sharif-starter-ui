@@ -34,7 +34,7 @@ export default function Main() {
       .post(urls.auction.create(), auction)
       .then((res) => {
         toast({
-          title: "حراج با موفقیت ساخته شد.",
+          title: "مزایده با موفقیت ساخته شد.",
           status: "success",
           position: "bottom-right",
           duration: 9000,
@@ -46,7 +46,7 @@ export default function Main() {
       })
       .catch((err) => {
         toast({
-          title: "ساخت حراج ناموفق بود.",
+          title: "ساخت مزایده ناموفق بود.",
           status: "error",
           position: "bottom-right",
           duration: 9000,
@@ -111,7 +111,7 @@ export default function Main() {
               icon={<Icon w="28px" h="28px" as={MdAddTask} color="white" />}
             />
           }
-          name="تعداد حراجی ها"
+          name="تعداد مزایده ها"
           value={state.auctionNum}
         />
         <MiniStatistics

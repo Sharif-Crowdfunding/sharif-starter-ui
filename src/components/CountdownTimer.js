@@ -17,7 +17,7 @@ const CountdownTimer = ({endTime}) => {
     const diff = deadline-now;
     let title = "";
     if (diff > 0) {
-      title = "زمان باقی‌مانده تا پایان حراج";
+      title = "زمان باقی‌مانده تا پایان مزایده";
       const duration = moment.duration(diff*1000);
 
       setCountdown({

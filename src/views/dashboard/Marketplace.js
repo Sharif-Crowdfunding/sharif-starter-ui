@@ -59,7 +59,7 @@ export default function Marketplace() {
             align={{ base: "start", md: "center" }}
           >
             <Text color={textColor} fontSize="2xl" ms="24px" fontWeight="700">
-              حراجی های من
+            مزایده های من
             </Text>
           </Flex>
           <SimpleGrid columns={{ base: 1, md: 5 }} gap="20px">
@@ -95,7 +95,7 @@ export default function Marketplace() {
               align={{ base: "start", md: "center" }}
             >
               <Text color={textColor} fontSize="2xl" ms="24px" fontWeight="700">
-                حراجی های موردعلاقه
+              مزایده‌های موردعلاقه
               </Text>
             </Flex>
             <SimpleGrid columns={{ base: 1, md: 5 }} gap="20px">
@@ -129,7 +129,7 @@ export default function Marketplace() {
               ms="24px"
               fontWeight="700"
             >
-              حراجی های بازار
+              مزایده‌های بازار
             </Text>
             <SimpleGrid
               columns={{ base: 1, md: 5 }}

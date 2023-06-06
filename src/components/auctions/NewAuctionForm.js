@@ -41,7 +41,7 @@ const AuctionTimeForm = ({ state, setState }) => {
           <InputGroup size="sm">
             <Input
               type="date"
-              placeholder="زمان شروع حراجی را وارد کنید..."
+              placeholder="زمان شروع مزایده را وارد کنید..."
               focusBorderColor="brand.400"
               rounded="md"
               onChange={(e) =>{}}
@@ -57,11 +57,11 @@ const AuctionTimeForm = ({ state, setState }) => {
               color: "gray.50",
             }}
           >
-            طول مدت حراج
+            طول مدت مزایده
           </FormLabel>
           <InputGroup size="sm">
             <Input
-              placeholder="طول مدت حراجی (به دقیقه) راوارد کنید..."
+              placeholder="طول مدت مزایده (به دقیقه) راوارد کنید..."
               focusBorderColor="brand.400"
               rounded="md"
               onChange={(e) =>
