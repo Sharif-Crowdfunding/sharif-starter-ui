@@ -10,7 +10,7 @@ import {
 
 const ActionsList = () => {
   return (
-    <Box bg={useColorModeValue("gray.100", "gray.700")}>
+    <Box bg={useColorModeValue("gray.100", "gray.700")} p={3}>
       <Stack spacing={0} align={"center"}>
         <Heading fontFamily={"MyShFont"}>مزایده های فعال بازار</Heading>
       </Stack>

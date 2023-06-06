@@ -96,8 +96,8 @@ export default function Introduction() {
           <Testimonial>
             <TestimonialContent>
               <TestimonialText>
-                دانشگاه صنعتی آریامهر در ۱۰ آبان ۱۳۴۴ با هدف تربیت و تأمین بخشی
-                از نیروهای متخصص موردنیاز ایران، در سطوح بالای علمی، تأسیس گردید.
+                دانشگاه صنعتی شریف در ۱۰ آبان ۱۳۴۴ با هدف تربیت و تأمین بخشی از
+                نیروهای متخصص موردنیاز ایران، در سطوح بالای علمی، تأسیس گردید.
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar src={sharif} name={"دانشگاه شریف"} />

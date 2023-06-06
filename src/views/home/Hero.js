@@ -36,11 +36,10 @@ export default function Hero() {
                   zIndex: -1,
                 }}
               >
-                جمع‌سپاری پروژه‌های دانشگاهی
+                تامین‌مالی‌جمعی پروژه‌های دانشگاهی
               </Text>
               <br />{" "}
-              <Text color={"blue.400"} as={"span"} fontFamily={"MyShFont"}
->
+              <Text color={"blue.400"} as={"span"} fontFamily={"MyShFont"}>
                 برپایه‌ی بلاک‌چین
               </Text>{" "}
             </Heading>
