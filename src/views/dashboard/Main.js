@@ -24,25 +24,25 @@ import MyAuctions from "./MyAuctions";
 import { useFetch } from "../../common/useFetch";
 
 export default function Main() {
+  const { marketState , dispatch } = useMarketReducer();
   const { data, error, loading } = useFetch(urls.auction.market(), "GET");
   const { state, refresh } = useWalletReducer();
-  const { marketState, marketDispatch } = useMarketReducer();
   const toast = useToast();
   const brandColor = useColorModeValue("brand.500", "white");
   const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
-
+  
   useEffect(() => {
     refresh();
     if (loading) {
-      marketDispatch({ type: MARKET_REFRESH });
+      dispatch({ type: MARKET_REFRESH });
     }
     if (error) {
       console.log(error);
     }
     if (data && !loading) {
-      marketDispatch({ type: MARKET_REFRESH_SUCCESS, payload: data });
+      dispatch({ type: MARKET_REFRESH_SUCCESS, payload: data });
     }
-  }, []);
+  }, [data, error, loading]);
 
   function createAuction(auction) {
     axios
@@ -103,6 +103,7 @@ export default function Main() {
         console.log(err);
       });
   }
+
   return (
     <>
       <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
@@ -145,7 +146,6 @@ export default function Main() {
             value={state.projectNum}
           />
         </SimpleGrid>
-
         <SimpleGrid
           mb="20px"
           columns={{ sm: 1, md: 2 }}
@@ -168,8 +168,8 @@ export default function Main() {
         </SimpleGrid>
       </Box>
       <MyAuctions
-        auctions={marketState?.auctions}
-        isLoading={marketState?.isLoading}
+        auctions={marketState.auctions}
+        isLoading={marketState.isLoading}
       />
     </>
   );

@@ -7,7 +7,6 @@ import {
   Spinner,
   Text,
   useColorModeValue,
-  useToast,
 } from "@chakra-ui/react";
 import Auction from "../../components/card/Auction";
 import { useNavigate } from "react-router-dom";
@@ -21,10 +20,10 @@ import {
 import MyAuctions from "./MyAuctions";
 
 export default function Marketplace() {
-  const { state, dispatch } = useMarketReducer();
-  const toast = useToast();
+  const { marketState, dispatch } = useMarketReducer();
   const navigate = useNavigate();
   const { data, error, loading } = useFetch(urls.auction.market(), "GET");
+  
   useEffect(() => {
     if (loading) {
       dispatch({ type: MARKET_REFRESH });
@@ -36,9 +35,9 @@ export default function Marketplace() {
       dispatch({ type: MARKET_REFRESH_SUCCESS, payload: data });
     }
   }, [error, data, loading]);
-  // Chakra Color Mode
+  
   const textColor = useColorModeValue("secondaryGray.900", "white");
-  const textColorBrand = useColorModeValue("brand.500", "white");
+  
   return (
     <Box pt={{ base: "180px", md: "80px", xl: "80px" }}>
       <Grid
@@ -50,7 +49,7 @@ export default function Marketplace() {
           flexDirection="column"
           gridArea={{ xl: "1 / 1 / 2 / 3", "2xl": "1 / 1 / 2 / 2" }}
         >
-          <MyAuctions auctions={state.auctions} isLoading={state.isLoading}/>
+          <MyAuctions auctions={marketState.auctions} isLoading={marketState.isLoading}/>
           <Flex direction="column">
             <Flex
               mt="45px"
@@ -64,10 +63,10 @@ export default function Marketplace() {
               </Text>
             </Flex>
             <SimpleGrid columns={{ base: 1, md: 5 }} gap="20px">
-              {state.isLoading ? (
+              {marketState.isLoading ? (
                 <Spinner size={"lg"} m="20px" />
               ) : (
-                state.auctions.map((a) =>
+                marketState.auctions.map((a) =>
                   a.is_liked ? (
                     <Auction
                       id={a.id}
@@ -101,10 +100,10 @@ export default function Marketplace() {
               gap="20px"
               mb={{ base: "20px", xl: "0px" }}
             >
-              {state.isLoading ? (
+              {marketState.isLoading ? (
                 <Spinner size={"lg"} m="20px" />
               ) : (
-                state.auctions.map((a) => (
+                marketState.auctions.map((a) => (
                   <Auction
                     id={a.id}
                     name={a.project.symbol}

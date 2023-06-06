@@ -11,13 +11,12 @@ import routes from "./NavConfig";
 
 export default function DashboardLayout({ children }) {
   const { user } = useAuth();
-
   let location = useLocation();
+  
   const activeRoute = (routeName) => {
     return location.pathname.includes(routeName);
   };
-  // states and functions
-  // const [toggleSidebar, setToggleSidebar] = useState(false);
+
   const getActiveRoute = (routes) => {
     let title = "داشبورد";
     for (let i = 0; i < routes.length; i++) {
@@ -30,12 +29,6 @@ export default function DashboardLayout({ children }) {
   const { onOpen } = useDisclosure();
   return (
     <>
-      {/* <SidebarContext.Provider
-        value={{
-          toggleSidebar,
-          setToggleSidebar,
-        }}
-      > */}
       {!user.isAuthenticated && <Navigate to="/" />}
         <Sidebar routes={routes} display="none" />
         <Box
@@ -57,8 +50,6 @@ export default function DashboardLayout({ children }) {
               <NavbarRTL
                 onOpen={onOpen}
                 brandText={getActiveRoute(routes)}
-                // secondary={getActiveNavbar(routes)}
-                // message={getActiveNavbarText(routes)}
                 fixed={false}
               />
             </Box>
@@ -75,7 +66,6 @@ export default function DashboardLayout({ children }) {
           </Box>
           <FixedPlugin />
         </Box>
-      {/* </SidebarContext.Provider> */}
     </>
   );
 }
