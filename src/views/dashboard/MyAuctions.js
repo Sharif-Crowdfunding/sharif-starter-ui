@@ -18,15 +18,15 @@ const MyAuctions = ({ auctions, isLoading }) => {
         align={{ base: "start", md: "center" }}
       >
         <Text color={textColor} fontSize="2xl" ms="24px" fontWeight="700">
-          حراجی های من
+        مزایده های من
         </Text>
       </Flex>
       <SimpleGrid columns={{ base: 1, md: 5 }} gap="20px">
         {isLoading ? (
           <Spinner size={"lg"} m="20px" />
-        ) : (
+        ) : 
           auctions.map((a) =>
-            a.creator === user.data.username ? (
+            a.creator === user.data.username ? 
               <Auction
                 id={a.id}
                 name={a.project.symbol}
@@ -41,8 +41,8 @@ const MyAuctions = ({ auctions, isLoading }) => {
                 inProgress={!(a.is_ended || a.is_canceled)}
                 isMine
               />
-            ) : null
-          )
+            : null
+          
         )}
       </SimpleGrid>
     </>

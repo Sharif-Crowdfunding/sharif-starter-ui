@@ -24,13 +24,13 @@ import MyAuctions from "./MyAuctions";
 import { useFetch } from "../../common/useFetch";
 
 export default function Main() {
-  const { marketState , dispatch } = useMarketReducer();
+  const { marketState, dispatch } = useMarketReducer();
   const { data, error, loading } = useFetch(urls.auction.market(), "GET");
   const { state, refresh } = useWalletReducer();
   const toast = useToast();
   const brandColor = useColorModeValue("brand.500", "white");
   const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
-  
+
   useEffect(() => {
     refresh();
     if (loading) {
@@ -49,7 +49,7 @@ export default function Main() {
       .post(urls.auction.create(), auction)
       .then((res) => {
         toast({
-          title: "حراج با موفقیت ساخته شد.",
+          title: "مزایده با موفقیت ساخته شد.",
           status: "success",
           position: "bottom-right",
           duration: 9000,
@@ -61,7 +61,7 @@ export default function Main() {
       })
       .catch((err) => {
         toast({
-          title: "ساخت حراج ناموفق بود.",
+          title: "ساخت مزایده ناموفق بود.",
           status: "error",
           position: "bottom-right",
           duration: 9000,
@@ -128,7 +128,7 @@ export default function Main() {
                 icon={<Icon w="28px" h="28px" as={MdAddTask} color="white" />}
               />
             }
-            name="تعداد حراجی ها"
+            name="تعداد مزایده‌ها"
             value={state.auctionNum}
           />
           <MiniStatistics
@@ -167,10 +167,10 @@ export default function Main() {
           )}
         </SimpleGrid>
       </Box>
-      <MyAuctions
-        auctions={marketState.auctions}
-        isLoading={marketState.isLoading}
-      />
+        <MyAuctions
+          auctions={marketState.auctions}
+          isLoading={marketState.isLoading}
+        />
     </>
   );
 }

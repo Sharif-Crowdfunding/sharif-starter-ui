@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { Box, Image, Flex, Text } from "@chakra-ui/react";
-import CountdownTimer from './CountdownTimer';
+import CountdownTimer from "./CountdownTimer";
 
-export default function ImageWithOverlay({image,time}) {
+export default function ImageWithOverlay({ image, time }) {
   const [isHovered, setIsHovered] = useState(false);
   const handleMouseOver = () => {
     setIsHovered(true);
@@ -25,6 +25,11 @@ export default function ImageWithOverlay({image,time}) {
           alt="My Image"
           borderRadius="20px"
           filter={isHovered ? "blur(3px)" : "none"}
+          style={{
+            height: "150px",
+            boxShadow:
+              "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px",
+          }}
         />
         {isHovered && (
           <Box
@@ -39,7 +44,7 @@ export default function ImageWithOverlay({image,time}) {
             alignItems="center"
             borderRadius="20px"
           >
-            <CountdownTimer endTime={time}/>
+            <CountdownTimer endTime={time} />
           </Box>
         )}
       </Box>
