@@ -27,7 +27,7 @@ import axios from "axios";
 import { Bids, MyBid } from "../../components/card/Bid";
 
 export default function AuctionDetails({ id }) {
-  const { state, dispatch } = useMarketReducer();
+  const { marketState, dispatch } = useMarketReducer();
   const toast = useToast();
   const navigate = useNavigate();
   const { data, error, loading } = useFetch(urls.auction.details(id), "GET");
@@ -77,12 +77,12 @@ export default function AuctionDetails({ id }) {
         >
           <Banner
             time={
-              state.auctionDetails.details &&
-              state.auctionDetails.details.end_time
+              marketState.auctionDetails.details &&
+              marketState.auctionDetails.details.end_time
             }
             project={
-              state.auctionDetails.details &&
-              state.auctionDetails.details.project
+              marketState.auctionDetails.details &&
+              marketState.auctionDetails.details.project
             }
           />
           <Card p="0px" my="1%">

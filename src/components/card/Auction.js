@@ -179,7 +179,7 @@ export default function Auction(props) {
           <VStack mb="5%">
             <HStack>
               <Text fontWeight="500" fontSize="sm" color={textColorBid}>
-                تعداد توکن حراج:{" "}
+                تعداد توکن مزایده:{" "}
               </Text>
               <Text fontWeight="500" fontSize="sm" color={textColorBid}>
                 {saleToken}
@@ -253,7 +253,7 @@ function getMyAction(endtime, id, dispatch, toast) {
           });
         }}
       >
-        اتمام حراجی
+        اتمام مزایده
       </Button>
       <Button
         isDisabled={diff <= 0}
@@ -279,7 +279,7 @@ function getMyAction(endtime, id, dispatch, toast) {
           });
         }}
       >
-        لغو حراجی
+        لغو مزایده
       </Button>
     </>
   );

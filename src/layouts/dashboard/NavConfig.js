@@ -13,7 +13,7 @@ const routes = [
     component: <Text fontSize={200} padding='300px'>Main</Text>,
   },
   {
-    name: "بازار حراجی",
+    name: "بازار مزایده",
     layout: "/d",
     path: "/marketplace",
     icon: (
