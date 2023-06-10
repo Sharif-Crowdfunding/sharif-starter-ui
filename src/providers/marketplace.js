@@ -100,7 +100,7 @@ const MarketProvider = ({ children }) => {
   const [state, dispatch] = useReducer(marketReducer, initialState);
 
   return (
-    <context.Provider value={{ state, dispatch }}>{children}</context.Provider>
+    <context.Provider value={{ marketState: state, dispatch }}>{children}</context.Provider>
   );
 };
 

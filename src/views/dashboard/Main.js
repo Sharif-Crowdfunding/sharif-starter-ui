@@ -1,12 +1,8 @@
 import {
-  Avatar,
   Box,
-  Flex,
-  FormLabel,
   GridItem,
   Icon,
   SimpleGrid,
-  Text,
   useColorModeValue,
   useToast,
 } from "@chakra-ui/react";
@@ -19,16 +15,35 @@ import PieChart from "../../components/charts/PieChart";
 import ColumnsTable from "../../components/ColumnsTable";
 import IconBox from "../../components/icons/IconBox";
 import { useWalletReducer } from "../../providers/wallet";
+import {
+  MARKET_REFRESH,
+  MARKET_REFRESH_SUCCESS,
+  useMarketReducer,
+} from "../../providers/marketplace";
+import MyAuctions from "./MyAuctions";
+import { useFetch } from "../../common/useFetch";
 
 export default function Main() {
+  const { marketState, dispatch } = useMarketReducer();
+  const { data, error, loading } = useFetch(urls.auction.market(), "GET");
   const { state, refresh } = useWalletReducer();
   const toast = useToast();
   const brandColor = useColorModeValue("brand.500", "white");
   const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
+
   useEffect(() => {
-    refresh()
-  }, [])
-  
+    refresh();
+    if (loading) {
+      dispatch({ type: MARKET_REFRESH });
+    }
+    if (error) {
+      console.log(error);
+    }
+    if (data && !loading) {
+      dispatch({ type: MARKET_REFRESH_SUCCESS, payload: data });
+    }
+  }, [data, error, loading]);
+
   function createAuction(auction) {
     axios
       .post(urls.auction.create(), auction)
@@ -88,69 +103,75 @@ export default function Main() {
         console.log(err);
       });
   }
-  return (
-    <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
-      <SimpleGrid
-        columns={{ base: 1, md: 2, lg: 3, "2xl": 4 }}
-        gap="20px"
-        mb="20px"
-      >
-        <GridItem colSpan={2}>
-          <MiniStatistics
-            name="موجودی حساب"
-            value={parseInt(state.ethBalance*1000)}
-            secondValue = "ریال"
-          />
-        </GridItem>
-        <MiniStatistics
-          startContent={
-            <IconBox
-              w="56px"
-              h="56px"
-              bg="linear-gradient(90deg, #4481EB 0%, #04BEFE 100%)"
-              icon={<Icon w="28px" h="28px" as={MdAddTask} color="white" />}
-            />
-          }
-          name="تعداد مزایده ها"
-          value={state.auctionNum}
-        />
-        <MiniStatistics
-          startContent={
-            <IconBox
-              w="56px"
-              h="56px"
-              bg={boxBg}
-              icon={
-                <Icon w="32px" h="32px" as={MdFileCopy} color={brandColor} />
-              }
-            />
-          }
-          name="تعداد پروژه ها"
-          value={state.projectNum}
-        />
-      </SimpleGrid>
 
-      <SimpleGrid
-        mb="20px"
-        columns={{ sm: 1, md: 2 }}
-        spacing={{ base: "20px", xl: "20px" }}
-      >
-        <ColumnsTable
-          columnsData={columnsDataColumns}
-          tableData={state.tokens}
-          tableName="توکن ها"
-          refresh={refresh}
-          onAction={createAuction}
-          onTransfer={transferToken}
-        />
-        {state.tokens.length > 0 && (
-          <PieChart
-            data={state.tokens.map((c) => c.balance)}
-            labels={state.tokens.map((c) => " "+c.symbol+" ")}
+  return (
+    <>
+      <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
+        <SimpleGrid
+          columns={{ base: 1, md: 2, lg: 3, "2xl": 4 }}
+          gap="20px"
+          mb="20px"
+        >
+          <GridItem colSpan={2}>
+            <MiniStatistics
+              name="موجودی حساب"
+              value={parseInt(state.ethBalance * 1000)}
+              secondValue="ریال"
+            />
+          </GridItem>
+          <MiniStatistics
+            startContent={
+              <IconBox
+                w="56px"
+                h="56px"
+                bg="linear-gradient(90deg, #4481EB 0%, #04BEFE 100%)"
+                icon={<Icon w="28px" h="28px" as={MdAddTask} color="white" />}
+              />
+            }
+            name="تعداد مزایده‌ها"
+            value={state.auctionNum}
           />
-        )}
-      </SimpleGrid>
-    </Box>
+          <MiniStatistics
+            startContent={
+              <IconBox
+                w="56px"
+                h="56px"
+                bg={boxBg}
+                icon={
+                  <Icon w="32px" h="32px" as={MdFileCopy} color={brandColor} />
+                }
+              />
+            }
+            name="تعداد پروژه ها"
+            value={state.projectNum}
+          />
+        </SimpleGrid>
+        <SimpleGrid
+          mb="20px"
+          columns={{ sm: 1, md: 2 }}
+          spacing={{ base: "20px", xl: "20px" }}
+        >
+          <ColumnsTable
+            columnsData={columnsDataColumns}
+            tableData={state.tokens}
+            tableName="توکن ها"
+            refresh={refresh}
+            onAction={createAuction}
+            onTransfer={transferToken}
+          />
+          {state.tokens.length > 0 && (
+            <PieChart
+              data={state.tokens.map((c) => c.balance)}
+              labels={state.tokens.map((c) => " " + c.symbol + " ")}
+            />
+          )}
+        </SimpleGrid>
+      </Box>
+        <MyAuctions
+          auctions={marketState.auctions}
+          isLoading={marketState.isLoading}
+        />
+    </>
   );
 }
 export const columnsDataColumns = [
