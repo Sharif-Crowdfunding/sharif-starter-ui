@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:8000";
+const API_BASE_URL = "http://localhost:8001";
 export const React_Base_URL = process.env.NODE_ENV === "production" ? "" : "";
 
 const urls = {
