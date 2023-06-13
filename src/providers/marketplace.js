@@ -1,7 +1,4 @@
-import axios from "axios";
-import React, { useContext, useReducer, useCallback } from "react";
-import urls from "../common/urls";
-import { useAuth } from "./auth";
+import React, { useContext, useReducer } from "react";
 
 export const GET_AUCTIONS = "GET_AUCTIONS";
 export const MARKET_REFRESH = "MARKET_REFRESH";
