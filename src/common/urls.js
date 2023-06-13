@@ -1,5 +1,4 @@
 const API_BASE_URL = "213.233.177.146:8001";
-export const React_Base_URL = process.env.NODE_ENV === "production" ? "" : "";
 
 const urls = {
   auth: {
