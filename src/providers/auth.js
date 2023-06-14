@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import urls from "../common/urls";
 import { useFetch } from "../common/useFetch";
+import { json } from "react-router-dom";
 
 const context = React.createContext();
 
@@ -15,18 +16,20 @@ const AuthProvider = ({ children }) => {
   }));
   const [user, setUser] = useState(() => ({
     isLoading: loading,
-    isAuthenticated: !error,
-    data: data,
+    isAuthenticated: window.localStorage.getItem("user"),
+    data: JSON.parse(window.localStorage.getItem("user")),
   }));
 
   useEffect(() => {
-    if (loading || !data) {
+    if (!loading && !data && error) {
+      window.localStorage.removeItem("user");
       setUser({
         isLoading: loading,
         isAuthenticated: false,
         data: data,
       });
-    } else {
+    } else if(!loading && data) {
+      window.localStorage.setItem("user", JSON.stringify(data));
       setUser({
         isLoading: loading,
         isAuthenticated: !error,

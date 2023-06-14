@@ -38,7 +38,6 @@ function Register() {
   const [lastName, setLastName] = useState();
 
   function register() {
-    console.log("bbbbb", urls.auth.register());
     axios
       .post(urls.auth.register(), {
         username: username,

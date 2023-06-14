@@ -1,30 +1,25 @@
 // Chakra imports
 import {
-  AvatarGroup,
-  Avatar,
   Box,
   Button,
-  Flex,
-  Icon,
-  Image,
-  Link,
-  Text,
-  useColorModeValue,
-  HStack,
   Card,
+  Flex,
+  HStack,
+  Icon,
+  Text,
   VStack,
-  useToast,
+  useColorModeValue,
+  useToast
 } from "@chakra-ui/react";
-import React, { useState } from "react";
-import { IoHeart, IoHeartOutline } from "react-icons/io5";
+import React from "react";
 import { FaShareAlt } from "react-icons/fa";
+import { IoHeart, IoHeartOutline } from "react-icons/io5";
 
-import { useMarketReducer } from "../../providers/marketplace";
 import axios from "axios";
-import urls from "../../common/urls";
 import moment from "moment";
+import urls from "../../common/urls";
+import { useMarketReducer } from "../../providers/marketplace";
 import ImageWithOverlay from "../ImageOverlay";
-import { useNavigate } from "react-router-dom";
 
 export default function Auction(props) {
   const toast = useToast();
@@ -47,7 +42,7 @@ export default function Auction(props) {
   const handleCopyClick = async () => {
     try {
       await navigator.clipboard.writeText(
-        "http://localhost:3000/d/details/" + id
+        `${window.location.origin}/d/details/${id}`
       );
       toast({
         title: "کپی شد",

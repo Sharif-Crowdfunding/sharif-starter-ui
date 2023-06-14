@@ -1,6 +1,6 @@
 // Chakra imports
 import {
-    Avatar,
+  Avatar,
   Button,
   Card,
   Flex,
@@ -10,6 +10,8 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useToast } from "@chakra-ui/react";
 import { useFetch } from "../../common/useFetch";
 import urls from "../../common/urls";
 import HistoryItem from "./HistoryItem";
@@ -34,9 +36,9 @@ export function Bids({ id }) {
       ) : (
         bids &&
         bids.map((b) => (
-            <HistoryItem
+          <HistoryItem
             name={b.bidder.username}
-            author={"تعداد توکن: " + b.token_num }
+            author={"تعداد توکن: " + b.token_num}
             image={Avatar}
             price={b.total_val}
           />
@@ -47,6 +49,7 @@ export function Bids({ id }) {
 }
 
 export function MyBid({ id }) {
+  const toast=useToast();
   const { data, error, loading } = useFetch(urls.auction.myBid(id), "GET");
   const [state, setState] = useState();
   useEffect(() => {
@@ -54,10 +57,40 @@ export function MyBid({ id }) {
       console.log(error);
     }
     if (data && data.length > 0) {
-      console.log("hello2");
       setState(data);
     }
   }, [error, data, loading]);
+
+  function cancelbid(id) {
+    axios
+      .get(urls.auction.cancelBid(id))
+      .then((res) => {
+        toast({
+          title: "حذف پیشنهاد با موفقیت انجام شد.",
+          status: "success",
+          position: "bottom-right",
+          duration: 9000,
+          isClosable: true,
+          containerStyle: {
+            direction: "rtl",
+          },
+        });
+      })
+      .catch((err) => {
+        toast({
+          title: "حذف ناموفق بود.",
+          status: "error",
+          position: "bottom-right",
+          duration: 9000,
+          isClosable: true,
+          containerStyle: {
+            direction: "rtl",
+          },
+        });
+        console.log(err);
+      });
+  }
+  
   return (
     <>
       {state && (
@@ -71,10 +104,10 @@ export function MyBid({ id }) {
           >
             <VStack>
               <Text>تعداد توکن:{state[0].token_num}</Text>
-              <Text>قیمت هر توکن:{state[0].token_val/(10**15)}</Text>
-              <Text>کل مبلغ پیشنهادی: {state[0].total_val/(10**15)}</Text>
+              <Text>قیمت هر توکن:{state[0].token_val / 10 ** 15}</Text>
+              <Text>کل مبلغ پیشنهادی: {state[0].total_val / 10 ** 15}</Text>
             </VStack>
-            <Button colorScheme="red" h={"90%"}>
+            <Button colorScheme="red" h={"90%"} onClick={() => cancelbid(id)}>
               حذف
             </Button>
           </Flex>
@@ -83,3 +116,5 @@ export function MyBid({ id }) {
     </>
   );
 }
+
+

@@ -26,6 +26,7 @@ const urls = {
     bid: () => `${API_BASE_URL}/auction/bid/`,
     myBid: (id) => `${API_BASE_URL}/auction/mybid/${id}/`,
     getBids: (id) => `${API_BASE_URL}/auction/bid/all/${id}/`,
+    cancelBid: (id) => `${API_BASE_URL}/auction/bid/cancel/${id}/`,
     details: (id) => `${API_BASE_URL}/auction/details/${id}/`,
     likeAuction: (id) => `${API_BASE_URL}/auction/like/${id}/`,
     endAuction: (id) => `${API_BASE_URL}/auction/end/${id}/`,

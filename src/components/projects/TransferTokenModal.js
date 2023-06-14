@@ -56,7 +56,8 @@ export default function TransferToken({ onSubmit, symbol }) {
               colorScheme="red"
               variant="solid"
               onClick={() => {
-                onSubmit(state);
+                if (state.token_num > 0 && state.username !== "")
+                  onSubmit(state);
               }}
             >
               ثبت
@@ -92,7 +93,7 @@ const TransferForm = ({ state, setState }) => {
               onChange={(e) =>
                 setState({
                   ...state,
-                  token_num: e.target.value,
+                  token_num: parseInt(e.target.value),
                 })
               }
             />

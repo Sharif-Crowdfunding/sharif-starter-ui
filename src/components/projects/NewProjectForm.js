@@ -168,12 +168,12 @@ const BasicInfo = ({ state, setState }) => {
               color: "gray.50",
             }}
           >
-            مستندات فنی(whitepaper) 
+            مستندات فنی(whitepaper)
           </FormLabel>
           <UploadFile />
-          </FormControl>
+        </FormControl>
 
-          <FormControl as={GridItem} colSpan={[3, 2]}>
+        <FormControl as={GridItem} colSpan={[3, 2]}>
           <FormLabel
             fontSize="sm"
             fontWeight="md"
@@ -182,7 +182,7 @@ const BasicInfo = ({ state, setState }) => {
               color: "gray.50",
             }}
           >
-            آدرس گیتهاب 
+            آدرس گیتهاب
           </FormLabel>
           <InputGroup size="sm">
             <Input
@@ -285,6 +285,10 @@ const TokenInfo = ({ state, setState }) => {
 };
 
 const ShareholdersForm = ({ state, setState, token }) => {
+  const total_shareholders_token = state.shareholders.reduce(
+    (sum, item) => sum + item.token_num,
+    0
+  );
   function setShareholdersNum(n) {
     let shareholders = [];
     for (let i = 0; i < n; i++) {
@@ -319,8 +323,13 @@ const ShareholdersForm = ({ state, setState, token }) => {
           >
             تعداد سهام‌داران
           </FormLabel>
-          <NumberInput max={10} min={2} onChange={(e) => setShareholdersNum(e-2)} dir="ltr">
-            <NumberInputField value={2}/>
+          <NumberInput
+            max={10}
+            min={2}
+            onChange={(e) => setShareholdersNum(e - 2)}
+            dir="ltr"
+          >
+            <NumberInputField value={2} />
             <NumberInputStepper>
               <NumberIncrementStepper />
               <NumberDecrementStepper />
@@ -343,7 +352,7 @@ const ShareholdersForm = ({ state, setState, token }) => {
               mx={"5px"}
               type="number"
               disabled={true}
-              value={token/5}
+              value={token / 5}
               focusBorderColor="brand.400"
               rounded="md"
             />
@@ -361,7 +370,7 @@ const ShareholdersForm = ({ state, setState, token }) => {
               mx={"5px"}
               type="number"
               disabled={true}
-              value={(token/5)*4}
+              value={(token / 5) * 4 -total_shareholders_token}
               focusBorderColor="brand.400"
               rounded="md"
             />
@@ -376,40 +385,40 @@ const ShareholdersForm = ({ state, setState, token }) => {
           </InputGroup>
 
           {state.shareholders.map((s, i) => (
-              <InputGroup size="sm" my={"5px"}>
-                <Text>{i + 1}.</Text>
-                <Input
-                  mx={"5px"}
-                  type="number"
-                  placeholder="تعدادتوکن..."
-                  focusBorderColor="brand.400"
-                  rounded="md"
-                  onChange={(e) => {
-                    let temp = [...state.shareholders];
-                    temp[i].token_num = parseInt(e.target.value);
-                    setState({
-                      ...state,
-                      shareholders: [...temp],
-                    });
-                  }}
-                />
-                <Input
-                  mx={"5px"}
-                  type="text"
-                  placeholder="نام کاربری..."
-                  focusBorderColor="brand.400"
-                  rounded="md"
-                  onChange={(e) => {
-                    let temp = [...state.shareholders];
-                    temp[i].username = e.target.value;
-                    setState({
-                      ...state,
-                      shareholders: [...temp],
-                    });
-                  }}
-                />
-              </InputGroup>
-            ))}
+            <InputGroup size="sm" my={"5px"}>
+              <Text>{i + 1}.</Text>
+              <Input
+                mx={"5px"}
+                type="number"
+                placeholder="تعدادتوکن..."
+                focusBorderColor="brand.400"
+                rounded="md"
+                onChange={(e) => {
+                  let temp = [...state.shareholders];
+                  temp[i].token_num = parseInt(e.target.value);
+                  setState({
+                    ...state,
+                    shareholders: [...temp],
+                  });
+                }}
+              />
+              <Input
+                mx={"5px"}
+                type="text"
+                placeholder="نام کاربری..."
+                focusBorderColor="brand.400"
+                rounded="md"
+                onChange={(e) => {
+                  let temp = [...state.shareholders];
+                  temp[i].username = e.target.value;
+                  setState({
+                    ...state,
+                    shareholders: [...temp],
+                  });
+                }}
+              />
+            </InputGroup>
+          ))}
         </FormControl>
       </SimpleGrid>
     </Box>
