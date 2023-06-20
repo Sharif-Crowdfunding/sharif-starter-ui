@@ -14,7 +14,6 @@ import {
 import CountdownTimer from "../CountdownTimer";
 
 export default function Banner({ time, project }) {
-  console.log(project, time);
 
   return (
     <>

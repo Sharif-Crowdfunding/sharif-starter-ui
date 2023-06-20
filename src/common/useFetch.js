@@ -21,7 +21,6 @@ export const useFetch = (url, method, values = null,withCredentials=true) => {
       .then(setData)
       .catch(setError)
       .finally(() => setLoading(false));
-    console.log(data);
   }, [url]);
 
   return { data, error, loading };
