@@ -1,6 +1,4 @@
-import axios from "axios";
-import React, { useContext, useReducer, useCallback } from "react";
-import urls from "../common/urls";
+import React, { useContext, useReducer } from "react";
 import { useAuth } from "./auth";
 
 export const MY_PROJECT_REFRESH = "MY_PROJECT_REFRESH";
