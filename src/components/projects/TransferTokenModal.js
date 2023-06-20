@@ -45,7 +45,7 @@ export default function TransferToken({ onSubmit, symbol }) {
       <Modal isCentered isOpen={isOpen} size={"xl"} onClose={onClose}>
         {overlay}
         <ModalContent dir="rtl">
-          <ModalHeader>انتقال توکن {symbol}</ModalHeader>
+          <ModalHeader style={{paddingRight:"80px"}}>انتقال توکن {symbol}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <TransferForm state={state} setState={setState} />
@@ -53,7 +53,7 @@ export default function TransferToken({ onSubmit, symbol }) {
           <ModalFooter>
             <Button
               w="7rem"
-              colorScheme="red"
+              colorScheme="green"
               variant="solid"
               onClick={() => {
                 if (state.token_num > 0 && state.username !== "")
