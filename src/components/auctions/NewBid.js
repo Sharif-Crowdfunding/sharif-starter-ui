@@ -16,10 +16,11 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 
-export default function NewBid({ onSubmit,id  }) {
+export default function NewBid({ onSubmit, id }) {
   const [state, setState] = useState({
-    id:id,
+    id: id,
     token_num: 1,
+    token_price: 0,
     total_val: 0,
   });
 
@@ -43,9 +44,14 @@ export default function NewBid({ onSubmit,id  }) {
               placeholder="تعدادتوکن برای خرید را وارد کنید..."
               focusBorderColor="brand.400"
               rounded="md"
-                onChange={(e) =>
-                  setState({ ...state, token_num: parseInt(e.target.value) })
-                }
+              onChange={(e) => {
+                var num = parseInt(e.target.value);
+                setState({
+                  ...state,
+                  token_num: num,
+                  total_val: num * state.token_price,
+                });
+              }}
             />
           </InputGroup>
         </FormControl>
@@ -67,16 +73,16 @@ export default function NewBid({ onSubmit,id  }) {
               placeholder="ارزش برای نماد خود را وارد کنید..."
               focusBorderColor="brand.400"
               rounded="md"
-                onChange={(e) =>
-                  setState({
-                    ...state,
-                    total_val: parseInt(e.target.value)*state.token_num* Math.pow(10, 15),
-                })}
+              onChange={(e) => {
+                var price = parseInt(e.target.value) * Math.pow(10, 15);
+                setState({
+                  ...state,
+                  token_price: price,
+                  total_val: price * state.token_num,
+                });
+              }}
             />
-          </InputGroup>{" "}
-          <FormHelperText>
-            {parseFloat(state.total_val) / 10 ** 18} اتریوم
-          </FormHelperText>
+          </InputGroup>
         </FormControl>
         <FormControl as={GridItem} colSpan={[3, 2]}>
           <FormLabel
@@ -87,20 +93,20 @@ export default function NewBid({ onSubmit,id  }) {
               color: "gray.50",
             }}
           >
-           ارزش کل پیشنهاد
+            ارزش کل پیشنهاد
           </FormLabel>
           <InputGroup size="sm">
             <Input
-            disabled="disabled"
-            value={state.total_val/ Math.pow(10, 15)}
+              disabled="disabled"
+              value={state.total_val / Math.pow(10, 15)}
               type="number"
               focusBorderColor="brand.400"
               rounded="md"
-              
             />
           </InputGroup>{" "}
           <FormHelperText>
-            {parseFloat(state.total_val) / 10 ** 18} اتریوم
+            {state.total_val>=0 && parseFloat(state.total_val) / Math.pow(10, 18)}{" "}
+            اتریوم
           </FormHelperText>
         </FormControl>
       </SimpleGrid>
@@ -110,11 +116,11 @@ export default function NewBid({ onSubmit,id  }) {
         fontSize="sm"
         fontWeight="500"
         borderRadius="70px"
-        w={'40%'}
+        w={"40%"}
         px="24px"
         py="5px"
-        mt={'20px'}
-        onClick={()=>onSubmit(state)}
+        mt={"20px"}
+        onClick={() => onSubmit(state)}
       >
         <Text>ثبت پیشنهاد</Text>
       </Button>
