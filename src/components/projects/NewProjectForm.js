@@ -326,7 +326,8 @@ const ShareholdersForm = ({ state, setState, token }) => {
           <NumberInput
             max={10}
             min={2}
-            onChange={(e) => setShareholdersNum(e - 2)}
+            onChange={(e) => {
+              setShareholdersNum(e - 2)}}
             dir="ltr"
           >
             <NumberInputField value={2} />
@@ -386,13 +387,14 @@ const ShareholdersForm = ({ state, setState, token }) => {
 
           {state.shareholders.map((s, i) => (
             <InputGroup size="sm" my={"5px"}>
-              <Text>{i + 1}.</Text>
+              <Text>{i + 3}.</Text>
               <Input
                 mx={"5px"}
                 type="number"
                 placeholder="تعدادتوکن..."
                 focusBorderColor="brand.400"
                 rounded="md"
+                value={s.token_num}
                 onChange={(e) => {
                   let temp = [...state.shareholders];
                   temp[i].token_num = parseInt(e.target.value);
@@ -408,6 +410,7 @@ const ShareholdersForm = ({ state, setState, token }) => {
                 placeholder="نام کاربری..."
                 focusBorderColor="brand.400"
                 rounded="md"
+                value={s.username}
                 onChange={(e) => {
                   let temp = [...state.shareholders];
                   temp[i].username = e.target.value;
