@@ -1,4 +1,4 @@
-const API_BASE_URL = "213.233.177.146:8001";
+const API_BASE_URL = "http://213.233.177.146:8001";
 
 const urls = {
   auth: {
